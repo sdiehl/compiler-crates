@@ -1,0 +1,10 @@
+[package]
+name = "bumpalo-example"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bumpalo = { version = "3.16", features = ["collections", "boxed"] }
+
+[lints]
+workspace = true

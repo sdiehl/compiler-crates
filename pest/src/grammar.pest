@@ -1,0 +1,135 @@
+// Whitespace handling - pest automatically skips whitespace between rules
+WHITESPACE = _{ " " | "\t" | "\n" | "\r" }
+COMMENT = _{ "//" ~ (!NEWLINE ~ ANY)* }
+
+// ===== EXPRESSION PARSER =====
+// Demonstrates precedence climbing and operators
+
+// Main expression entry point using precedence climbing
+expression = { term ~ (binary_op ~ term)* }
+
+// Terms in expressions
+term = { number | identifier | "(" ~ expression ~ ")" }
+
+// Binary operators for precedence climbing
+binary_op = _{ add | subtract | multiply | divide | power | eq | ne | lt | le | gt | ge }
+add = { "+" }
+subtract = { "-" }
+multiply = { "*" }
+divide = { "/" }
+power = { "^" }
+eq = { "==" }
+ne = { "!=" }
+lt = { "<" }
+le = { "<=" }
+gt = { ">" }
+ge = { ">=" }
+
+// Basic tokens
+number = @{ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+identifier = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+
+// ===== JSON PARSER =====
+// Demonstrates recursive structures and string handling
+
+json_value = { object | array | string | number | boolean | null }
+
+object = { "{" ~ (pair ~ ("," ~ pair)*)? ~ "}" }
+pair = { string ~ ":" ~ json_value }
+
+array = { "[" ~ (json_value ~ ("," ~ json_value)*)? ~ "]" }
+
+string = ${ "\"" ~ inner_string ~ "\"" }
+inner_string = @{ char* }
+char = {
+    !("\"" | "\\") ~ ANY
+    | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
+    | "\\" ~ ("u" ~ ASCII_HEX_DIGIT{4})
+}
+
+boolean = { "true" | "false" }
+null = { "null" }
+
+// ===== PROGRAMMING LANGUAGE CONSTRUCTS =====
+// Demonstrates complex language parsing with statements and control flow
+
+program = { SOI ~ statement* ~ EOI }
+
+statement = {
+    if_statement
+    | while_statement
+    | function_def
+    | assignment
+    | expression_statement
+    | block
+}
+
+// Control flow statements
+if_statement = { "if" ~ expression ~ block ~ ("else" ~ (if_statement | block))? }
+while_statement = { "while" ~ expression ~ block }
+
+// Function definition
+function_def = { "fn" ~ identifier ~ "(" ~ parameter_list? ~ ")" ~ "->" ~ type_name ~ block }
+parameter_list = { parameter ~ ("," ~ parameter)* }
+parameter = { identifier ~ ":" ~ type_name }
+
+// Assignment and expressions
+assignment = { identifier ~ "=" ~ expression ~ ";" }
+expression_statement = { expression ~ ";" }
+
+// Block structure
+block = { "{" ~ statement* ~ "}" }
+
+// Type system
+type_name = { "int" | "float" | "bool" | "string" | identifier }
+
+// ===== CALCULATOR WITH PRECEDENCE =====
+// Demonstrates pest's precedence climbing capabilities
+
+calculation = { SOI ~ calc_expression ~ EOI }
+calc_expression = { calc_term ~ (calc_add_op ~ calc_term)* }
+calc_term = { calc_factor ~ (calc_mul_op ~ calc_factor)* }
+calc_factor = { calc_power }
+calc_power = { calc_atom ~ (calc_pow_op ~ calc_power)? }
+calc_atom = { calc_number | "(" ~ calc_expression ~ ")" | calc_unary }
+calc_unary = { (calc_plus | calc_minus) ~ calc_number | calc_number }
+
+calc_add_op = { calc_plus | calc_minus }
+calc_mul_op = { calc_multiply | calc_divide }
+calc_pow_op = { calc_power_op }
+
+calc_plus = { "+" }
+calc_minus = { "-" }
+calc_multiply = { "*" }
+calc_divide = { "/" }
+calc_power_op = { "^" }
+
+calc_number = @{ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+
+// ===== CUSTOM ERROR HANDLING =====
+// Demonstrates custom error messages and recovery
+
+error_prone = { SOI ~ error_statement* ~ EOI }
+error_statement = {
+    good_statement
+    | expected_semicolon
+}
+
+good_statement = { identifier ~ "=" ~ number ~ ";" }
+expected_semicolon = { identifier ~ "=" ~ number ~ !(";" | NEWLINE) }
+
+// ===== LEXER-LIKE TOKENS =====
+// Demonstrates atomic rules and token extraction
+
+token_stream = { SOI ~ token* ~ EOI }
+token = _{ keyword | operator_token | punctuation | literal | identifier_token }
+
+keyword = { "if" | "else" | "while" | "fn" | "let" | "return" | "mut" }
+operator_token = { "+=" | "-=" | "==" | "!=" | "<=" | ">=" | "&&" | "||" | "++" | "--" | "->" | "+" | "-" | "*" | "/" | "=" | "<" | ">" | "!" }
+punctuation = { "(" | ")" | "{" | "}" | "[" | "]" | ";" | "," | ":" }
+literal = { string_literal | number_literal | boolean_literal }
+string_literal = ${ "\"" ~ string_content ~ "\"" }
+string_content = @{ (!"\"" ~ ANY)* }
+number_literal = @{ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+boolean_literal = { "true" | "false" }
+identifier_token = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }

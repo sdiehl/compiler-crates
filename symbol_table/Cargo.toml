@@ -1,0 +1,10 @@
+[package]
+name = "symbol_table-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+symbol_table = { version = "0.4", features = ["global"] }
+
+[lints]
+workspace = true

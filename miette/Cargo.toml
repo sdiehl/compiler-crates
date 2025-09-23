@@ -1,0 +1,11 @@
+[package]
+name = "miette-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+miette = { version = "7.2", features = ["fancy"] }
+thiserror = { workspace = true }
+
+[lints]
+workspace = true

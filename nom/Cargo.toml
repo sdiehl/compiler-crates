@@ -1,0 +1,10 @@
+[package]
+name = "nom-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+nom = { workspace = true }
+
+[lints]
+workspace = true

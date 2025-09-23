@@ -1,0 +1,64 @@
+use crate::ast::{Expr, Statement, Program};
+use std::str::FromStr;
+
+grammar;
+
+// Expression language parser with built-in lexer
+// This demonstrates a more complex grammar with AST construction
+
+pub Program: Program = {
+    <statements:Statement*> => Program { statements },
+};
+
+Statement: Statement = {
+    <e:Expr> ";" => Statement::Expression(e),
+    "let" <name:Identifier> "=" <e:Expr> ";" => Statement::Assignment(name, e),
+    "print" <e:Expr> ";" => Statement::Print(e),
+    "if" <cond:Expr> "{" <then:Statement*> "}" <els:("else" "{" <Statement*> "}")?> => {
+        Statement::If(cond, then, els)
+    },
+    "while" <cond:Expr> "{" <body:Statement*> "}" => Statement::While(cond, body),
+};
+
+pub Expr: Expr = {
+    <l:Expr> "+" <r:Term> => Expr::Add(Box::new(l), Box::new(r)),
+    <l:Expr> "-" <r:Term> => Expr::Subtract(Box::new(l), Box::new(r)),
+    Term,
+};
+
+Term: Expr = {
+    <l:Term> "*" <r:Factor> => Expr::Multiply(Box::new(l), Box::new(r)),
+    <l:Term> "/" <r:Factor> => Expr::Divide(Box::new(l), Box::new(r)),
+    Factor,
+};
+
+Factor: Expr = {
+    Primary,
+    "-" <e:Factor> => Expr::Negate(Box::new(e)),
+};
+
+Primary: Expr = {
+    Number => Expr::Number(<>),
+    Identifier => Expr::Variable(<>),
+    <name:Identifier> "(" <args:Comma<Expr>> ")" => Expr::Call(name, args),
+    "(" <Expr> ")",
+};
+
+// Helper rule for comma-separated lists
+Comma<T>: Vec<T> = {
+    <mut v:(<T> ",")*> <e:T?> => match e {
+        None => v,
+        Some(e) => {
+            v.push(e);
+            v
+        }
+    }
+};
+
+Number: f64 = {
+    r"[0-9]+(\.[0-9]+)?" => f64::from_str(<>).unwrap(),
+};
+
+Identifier: String = {
+    r"[a-zA-Z][a-zA-Z0-9_]*" => <>.to_string(),
+};

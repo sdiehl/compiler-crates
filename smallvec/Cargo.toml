@@ -1,0 +1,10 @@
+[package]
+name = "smallvec-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+smallvec = "1.13"
+
+[lints]
+workspace = true

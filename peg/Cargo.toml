@@ -1,0 +1,10 @@
+[package]
+name = "peg-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+peg = "0.8"
+
+[lints]
+workspace = true

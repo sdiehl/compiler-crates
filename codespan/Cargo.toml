@@ -1,0 +1,10 @@
+[package]
+name = "codespan-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+codespan = "0.11"
+
+[lints]
+workspace = true

@@ -1,0 +1,92 @@
+use crate::ast::{Expr, Statement, Program};
+use crate::token::Token;
+
+grammar;
+
+// External token type from logos
+extern {
+    type Location = usize;
+    type Error = String;
+
+    enum Token {
+        "+" => Token::Plus,
+        "-" => Token::Minus,
+        "*" => Token::Star,
+        "/" => Token::Slash,
+        "=" => Token::Equals,
+        "(" => Token::LeftParen,
+        ")" => Token::RightParen,
+        "{" => Token::LeftBrace,
+        "}" => Token::RightBrace,
+        "," => Token::Comma,
+        ";" => Token::Semicolon,
+        "let" => Token::Let,
+        "if" => Token::If,
+        "else" => Token::Else,
+        "while" => Token::While,
+        "print" => Token::Print,
+        "true" => Token::True,
+        "false" => Token::False,
+        "number" => Token::Number(<f64>),
+        "identifier" => Token::Identifier(<String>),
+        "string" => Token::StringLiteral(<String>),
+    }
+}
+
+pub Program: Program = {
+    <statements:Statement*> => Program { statements },
+};
+
+Statement: Statement = {
+    <e:Expr> ";" => Statement::Expression(e),
+    "let" <name:"identifier"> "=" <e:Expr> ";" => Statement::Assignment(name, e),
+    "print" <e:Expr> ";" => Statement::Print(e),
+    "if" <cond:Expr> "{" <then:Statement*> "}" <els:ElseClause?> => {
+        Statement::If(cond, then, els)
+    },
+    "while" <cond:Expr> "{" <body:Statement*> "}" => Statement::While(cond, body),
+};
+
+ElseClause: Vec<Statement> = {
+    "else" "{" <Statement*> "}" => <>,
+};
+
+pub Expr: Expr = {
+    AddExpr,
+};
+
+AddExpr: Expr = {
+    <l:AddExpr> "+" <r:MulExpr> => Expr::Add(Box::new(l), Box::new(r)),
+    <l:AddExpr> "-" <r:MulExpr> => Expr::Subtract(Box::new(l), Box::new(r)),
+    MulExpr,
+};
+
+MulExpr: Expr = {
+    <l:MulExpr> "*" <r:UnaryExpr> => Expr::Multiply(Box::new(l), Box::new(r)),
+    <l:MulExpr> "/" <r:UnaryExpr> => Expr::Divide(Box::new(l), Box::new(r)),
+    UnaryExpr,
+};
+
+UnaryExpr: Expr = {
+    "-" <e:UnaryExpr> => Expr::Negate(Box::new(e)),
+    PrimaryExpr,
+};
+
+PrimaryExpr: Expr = {
+    <n:"number"> => Expr::Number(n),
+    <id:"identifier"> => Expr::Variable(id),
+    <name:"identifier"> "(" <args:Arguments> ")" => Expr::Call(name, args),
+    "(" <Expr> ")",
+    "true" => Expr::Number(1.0),
+    "false" => Expr::Number(0.0),
+};
+
+Arguments: Vec<Expr> = {
+    <mut v:(<Expr> ",")*> <e:Expr?> => match e {
+        None => v,
+        Some(e) => {
+            v.push(e);
+            v
+        }
+    }
+};

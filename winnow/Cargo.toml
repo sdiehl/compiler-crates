@@ -1,0 +1,10 @@
+[package]
+name = "winnow-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+winnow = "0.6"
+
+[lints]
+workspace = true

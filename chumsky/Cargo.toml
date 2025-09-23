@@ -1,0 +1,11 @@
+[package]
+name = "chumsky-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chumsky = "0.9"
+ariadne = "0.4"
+
+[lints]
+workspace = true

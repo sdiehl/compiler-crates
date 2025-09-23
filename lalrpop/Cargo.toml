@@ -1,0 +1,15 @@
+[package]
+name = "lalrpop-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lalrpop-util = { version = "0.20", features = ["lexer"] }
+logos = { workspace = true }
+regex = "1"
+
+[build-dependencies]
+lalrpop = "0.22"
+
+[lints]
+workspace = true

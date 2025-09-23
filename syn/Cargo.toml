@@ -1,0 +1,12 @@
+[package]
+name = "syn-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+syn = { version = "2.0", features = ["full", "parsing", "printing", "visit", "visit-mut", "extra-traits"] }
+quote = "1.0"
+proc-macro2 = "1.0"
+
+[lints]
+workspace = true

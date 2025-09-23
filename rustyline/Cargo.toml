@@ -1,0 +1,10 @@
+[package]
+name = "rustyline-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rustyline = "17.0"
+
+[lints]
+workspace = true

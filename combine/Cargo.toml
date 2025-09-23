@@ -1,0 +1,10 @@
+[package]
+name = "combine-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+combine = "4.6"
+
+[lints]
+workspace = true

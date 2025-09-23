@@ -1,0 +1,147 @@
+// Demonstrating left recursion handling in LALRPOP
+// LALRPOP naturally handles left recursion, which is a major advantage over
+// recursive descent parsers and PEG parsers
+
+use crate::ast::{Expr};
+
+grammar;
+
+// LEFT RECURSIVE version - natural and efficient in LALRPOP
+// This parses left-to-right: "1 - 2 - 3" becomes (1 - 2) - 3 = -4
+pub LeftAssociative: Expr = {
+    <l:LeftAssociative> "-" <r:Term> => Expr::Subtract(Box::new(l), Box::new(r)),
+    Term,
+};
+
+// RIGHT RECURSIVE version - for comparison
+// This would parse right-to-left: "1 - 2 - 3" becomes 1 - (2 - 3) = 2
+pub RightAssociative: Expr = {
+    <l:Term> "-" <r:RightAssociative> => Expr::Subtract(Box::new(l), Box::new(r)),
+    Term,
+};
+
+// List parsing with left recursion - builds list as we go
+pub CommaSeparatedLeft: Vec<i32> = {
+    <mut list:CommaSeparatedLeft> "," <item:Number> => {
+        list.push(item);
+        list
+    },
+    <n:Number> => vec![n],
+};
+
+// Alternative without left recursion using Kleene star
+pub CommaSeparatedStar: Vec<i32> = {
+    <first:Number> <rest:("," <Number>)*> => {
+        let mut result = vec![first];
+        result.extend(rest);
+        result
+    },
+    => vec![],
+};
+
+// Demonstrating left recursion for building nested structures
+pub FieldAccess: String = {
+    <obj:FieldAccess> "." <field:Identifier> => format!("{}.{}", obj, field),
+    Identifier,
+};
+
+// Method chaining with left recursion
+pub MethodChain: String = {
+    <obj:MethodChain> "." <method:Identifier> "(" ")" => format!("{}.{}()", obj, method),
+    Identifier,
+};
+
+// Binary operators with proper left associativity
+pub BinaryOp: Expr = {
+    // Lowest precedence - left associative
+    <l:BinaryOp> "||" <r:AndExpr> => Expr::Call("or".to_string(), vec![l, r]),
+    AndExpr,
+};
+
+AndExpr: Expr = {
+    <l:AndExpr> "&&" <r:EqExpr> => Expr::Call("and".to_string(), vec![l, r]),
+    EqExpr,
+};
+
+EqExpr: Expr = {
+    <l:EqExpr> "==" <r:AddExpr> => Expr::Call("eq".to_string(), vec![l, r]),
+    <l:EqExpr> "!=" <r:AddExpr> => Expr::Call("neq".to_string(), vec![l, r]),
+    AddExpr,
+};
+
+AddExpr: Expr = {
+    <l:AddExpr> "+" <r:MulExpr> => Expr::Add(Box::new(l), Box::new(r)),
+    <l:AddExpr> "-" <r:MulExpr> => Expr::Subtract(Box::new(l), Box::new(r)),
+    MulExpr,
+};
+
+MulExpr: Expr = {
+    <l:MulExpr> "*" <r:UnaryExpr> => Expr::Multiply(Box::new(l), Box::new(r)),
+    <l:MulExpr> "/" <r:UnaryExpr> => Expr::Divide(Box::new(l), Box::new(r)),
+    <l:MulExpr> "%" <r:UnaryExpr> => Expr::Call("mod".to_string(), vec![l, r]),
+    UnaryExpr,
+};
+
+UnaryExpr: Expr = {
+    "!" <e:UnaryExpr> => Expr::Call("not".to_string(), vec![e]),
+    "-" <e:UnaryExpr> => Expr::Negate(Box::new(e)),
+    PostfixExpr,
+};
+
+// Postfix operators with left recursion
+PostfixExpr: Expr = {
+    <e:PostfixExpr> "++" => Expr::Call("post_inc".to_string(), vec![e]),
+    <e:PostfixExpr> "--" => Expr::Call("post_dec".to_string(), vec![e]),
+    <e:PostfixExpr> "[" <index:Expr> "]" => Expr::Call("index".to_string(), vec![e, index]),
+    <func:PostfixExpr> "(" <args:Arguments> ")" => Expr::Call("apply".to_string(), {
+        let mut all_args = vec![func];
+        all_args.extend(args);
+        all_args
+    }),
+    PrimaryExpr,
+};
+
+PrimaryExpr: Expr = {
+    Number => Expr::Number(<> as f64),
+    Identifier => Expr::Variable(<>),
+    "(" <Expr> ")",
+};
+
+// Helper for comma-separated arguments
+Arguments: Vec<Expr> = {
+    <mut v:(<Expr> ",")*> <e:Expr?> => match e {
+        None => v,
+        Some(e) => {
+            v.push(e);
+            v
+        }
+    }
+};
+
+// Common patterns that benefit from left recursion
+pub ArrayAccess: String = {
+    <arr:ArrayAccess> "[" <idx:Number> "]" => format!("{}[{}]", arr, idx),
+    Identifier,
+};
+
+pub QualifiedName: String = {
+    <namespace:QualifiedName> "::" <name:Identifier> => format!("{}::{}", namespace, name),
+    Identifier,
+};
+
+// Terminals
+Term: Expr = {
+    Number => Expr::Number(<> as f64),
+    "(" <LeftAssociative> ")",
+};
+
+Number: i32 = {
+    r"[0-9]+" => <>.parse().unwrap(),
+};
+
+Identifier: String = {
+    r"[a-zA-Z_][a-zA-Z0-9_]*" => <>.to_string(),
+};
+
+// Re-export main expression parser
+pub Expr = BinaryOp;

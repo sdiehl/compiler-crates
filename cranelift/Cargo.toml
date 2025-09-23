@@ -1,0 +1,15 @@
+[package]
+name = "cranelift-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cranelift = "0.124.0"
+cranelift-module = "0.124.0"
+cranelift-jit = "0.124.0"
+cranelift-native = "0.124.0"
+target-lexicon = "0.12"
+
+# JIT compilation inherently requires unsafe code for function pointer transmutation
+[lints.rust]
+unsafe_code = "allow"

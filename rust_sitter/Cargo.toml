@@ -1,0 +1,17 @@
+[package]
+name = "rust-sitter-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rust-sitter = "0.4"
+
+[build-dependencies]
+rust-sitter-tool = "0.4"
+
+[dev-dependencies]
+insta = "1.39"
+wasm-bindgen-test = "0.3"
+
+[lints]
+workspace = true

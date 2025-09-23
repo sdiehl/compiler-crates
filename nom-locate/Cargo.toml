@@ -1,0 +1,11 @@
+[package]
+name = "nom-locate-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+nom = { workspace = true }
+nom_locate = "5.0"
+
+[lints]
+workspace = true
