@@ -4,6 +4,8 @@
 
 # Compiler Crates
 
+[![CI](https://github.com/sdiehl/compiler-crates/actions/workflows/ci.yml/badge.svg)](https://github.com/sdiehl/compiler-crates/actions/workflows/ci.yml)
+
 A collection Rust crate examples focused on compiler development.
 
 * [**Read Online**](https://sdiehl.github.io/compiler-crates/)
@@ -66,3 +68,7 @@ just format      # Format all code
 just build-docs  # Build documentation
 just serve-docs  # Serve documentation locally
 ```
+
+## License
+
+MIT Licensed. Copyright 2025 Stephen Diehl.
