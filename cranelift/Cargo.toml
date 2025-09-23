@@ -8,7 +8,7 @@ cranelift = "0.124.0"
 cranelift-module = "0.124.0"
 cranelift-jit = "0.124.0"
 cranelift-native = "0.124.0"
-target-lexicon = "0.12"
+target-lexicon = "0.13"
 
 # JIT compilation inherently requires unsafe code for function pointer transmutation
 [lints.rust]
