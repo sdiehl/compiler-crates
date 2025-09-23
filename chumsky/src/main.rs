@@ -8,26 +8,34 @@ fn main() {
     println!("1. Basic Expression Parsing:");
     let parser = expr_parser();
     let input = "2 + 3 * 4 - 1";
-    match parser.parse(input) {
-        Ok(expr) => println!("  Input: {}\n  AST: {:#?}", input, expr),
-        Err(errors) => {
-            println!("  Parse errors:");
-            for err in errors {
-                println!("    {}", err);
-            }
+    let result = parser.parse(input);
+    if !result.has_errors() {
+        println!(
+            "  Input: {}\n  AST: {:#?}",
+            input,
+            result.into_output().unwrap()
+        );
+    } else {
+        println!("  Parse errors:");
+        for err in result.into_errors() {
+            println!("    {}", err);
         }
     }
 
     // Let bindings and function calls
     println!("\n2. Let Bindings and Function Calls:");
     let input = "let x = 5 in max(x, 10)";
-    match parser.parse(input) {
-        Ok(expr) => println!("  Input: {}\n  AST: {:#?}", input, expr),
-        Err(errors) => {
-            println!("  Parse errors:");
-            for err in errors {
-                println!("    {}", err);
-            }
+    let result = parser.parse(input);
+    if !result.has_errors() {
+        println!(
+            "  Input: {}\n  AST: {:#?}",
+            input,
+            result.into_output().unwrap()
+        );
+    } else {
+        println!("  Parse errors:");
+        for err in result.into_errors() {
+            println!("    {}", err);
         }
     }
 
@@ -35,19 +43,17 @@ fn main() {
     println!("\n3. Lexer with Spans:");
     let lexer = lexer();
     let input = "let x = 42 in x + 1";
-    match lexer.parse(input) {
-        Ok(tokens) => {
-            println!("  Input: {}", input);
-            println!("  Tokens:");
-            for (token, span) in tokens {
-                println!("    {:?} at {:?}", token, span);
-            }
+    let result = lexer.parse(input);
+    if !result.has_errors() {
+        println!("  Input: {}", input);
+        println!("  Tokens:");
+        for (token, span) in result.into_output().unwrap() {
+            println!("    {:?} at {:?}", token, span);
         }
-        Err(errors) => {
-            println!("  Lexer errors:");
-            for err in errors {
-                println!("    {}", err);
-            }
+    } else {
+        println!("  Lexer errors:");
+        for err in result.into_errors() {
+            println!("    {}", err);
         }
     }
 
@@ -62,16 +68,16 @@ fn main() {
 
     for input in inputs {
         println!("  Input: {}", input);
-        match robust.parse(input) {
-            Ok(exprs) => {
-                println!("    Recovered {} expressions", exprs.len());
-                for (i, expr) in exprs.iter().enumerate() {
-                    println!("      [{}]: {:?}", i, expr);
-                }
+        let result = robust.parse(input);
+        if let Some(exprs) = result.output() {
+            println!("    Recovered {} expressions", exprs.len());
+            for (i, expr) in exprs.iter().enumerate() {
+                println!("      [{}]: {:?}", i, expr);
             }
-            Err(errors) => {
-                println!("    Parse failed with {} errors", errors.len());
-            }
+        }
+        if result.has_errors() {
+            let errors = result.into_errors();
+            println!("    Parse failed with {} errors", errors.len());
         }
     }
 
@@ -87,15 +93,15 @@ fn main() {
 
     for input in inputs {
         print!("  Input: {} -> ", input);
-        match validated.parse(input) {
-            Ok(expr) => println!("Valid: {:?}", expr),
-            Err(errors) => {
-                print!("Invalid: ");
-                for err in errors {
-                    print!("{} ", err);
-                }
-                println!();
+        let result = validated.parse(input);
+        if !result.has_errors() {
+            println!("Valid: {:?}", result.into_output().unwrap());
+        } else {
+            print!("Invalid: ");
+            for err in result.into_errors() {
+                print!("{} ", err);
             }
+            println!();
         }
     }
 }
