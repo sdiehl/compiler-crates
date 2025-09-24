@@ -6,7 +6,7 @@
 
 [![CI](https://github.com/sdiehl/compiler-crates/actions/workflows/ci.yml/badge.svg)](https://github.com/sdiehl/compiler-crates/actions/workflows/ci.yml)
 
-A collection Rust crate examples focused on compiler development.
+A collection of minimal Rust examples focused on compiler development.
 
 * [**Read Online**](https://sdiehl.github.io/compiler-crates/)
 * [Source Code](https://github.com/sdiehl/compiler-crates)
@@ -28,7 +28,6 @@ A collection Rust crate examples focused on compiler development.
 ### Parser Utilities
 
 - [**nom_locate**](./nom_locate/src/lib.rs) - Location tracking for nom parsers
-- [**proc-macro2**](./proc-macro2/src/lib.rs) - Stable interface to Rust's procedural macro API
 - [**quote**](./quote/src/lib.rs) - Quasi-quoting for Rust code generation
 - [**syn**](./syn/src/lib.rs) - Rust syntax tree parsing and manipulation for procedural macros
 

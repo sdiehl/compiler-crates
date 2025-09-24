@@ -4,6 +4,39 @@ The `inkwell` crate provides safe, idiomatic Rust bindings to LLVM, enabling com
 
 The architecture of inkwell mirrors LLVM's conceptual model while providing Rust-native abstractions. Contexts manage the lifetime of LLVM data structures, modules contain functions and global variables, builders construct instruction sequences, and execution engines provide JIT compilation capabilities. This design ensures memory safety through Rust's lifetime system while maintaining the full power and flexibility of LLVM's code generation capabilities.
 
+## Installation and Setup
+
+Inkwell currently supports LLVM versions 8 through 18. You must have LLVM installed on your system and specify the version in your `Cargo.toml` dependencies.
+
+### macOS Installation
+
+Install LLVM 18 using Homebrew:
+
+```bash
+brew install llvm@18
+```
+
+### Cargo Configuration
+
+Add inkwell to your `Cargo.toml` with the appropriate LLVM version feature flag:
+
+```toml
+[dependencies]
+inkwell = { version = "0.6.0", features = ["llvm18-1"] }
+```
+
+Supported versions use the pattern `llvmM-0` where M is the LLVM major version (8-18).
+
+### Environment Setup
+
+On macOS, you may need to set environment variables to help the build system find LLVM:
+
+```bash
+export LLVM_SYS_180_PREFIX=$(brew --prefix llvm@18)
+```
+
+Note: The environment variable format is `LLVM_SYS_<version>_PREFIX` where version is the LLVM version without dots (e.g., 180 for LLVM 18.0).
+
 ## Basic Usage
 
 Creating an LLVM context for code generation:
@@ -128,7 +161,7 @@ Applying LLVM's optimization passes using the modern pass manager:
 #![function!("inkwell/src/lib.rs", run_custom_passes)]
 ```
 
-LLVM 18 provides a modern pass manager with a string-based interface for specifying optimization pipelines. Common passes include instcombine, reassociate, gvn, simplifycfg, and mem2reg. The PassBuilderOptions allows fine-grained control over optimization behavior.
+LLVM provides a modern pass manager (available in LLVM 18) with a string-based interface for specifying optimization pipelines. Common passes include instcombine, reassociate, gvn, simplifycfg, and mem2reg. The PassBuilderOptions allows fine-grained control over optimization behavior.
 
 ## JIT Compilation
 
