@@ -2,7 +2,7 @@
 
 The `melior` crate provides safe Rust bindings to MLIR (Multi-Level Intermediate Representation), enabling compiler developers to leverage MLIR's powerful infrastructure for building optimizing compilers and domain-specific code generators. MLIR represents computations as a graph of operations organized into regions and blocks, supporting multiple levels of abstraction from high-level tensor operations to low-level machine instructions. The melior bindings expose MLIR's dialect system, allowing developers to work with various IR representations including arithmetic operations, control flow, tensor computations, and LLVM IR generation.
 
-The architecture of melior wraps MLIR's C API with idiomatic Rust abstractions, providing type safety and memory safety guarantees while maintaining the flexibility of MLIR's extensible design. The crate supports all standard MLIR dialects including func, arith, scf, tensor, memref, and llvm, enabling progressive lowering from high-level abstractions to executable code. This multi-level approach allows compilers to perform optimizations at the most appropriate abstraction level, improving both compilation time and generated code quality.
+The architecture of melior wraps MLIR's C API with idiomatic Rust abstractions, providing type safety and memory safety guarantees while maintaining the flexibility of MLIR's extensible design. The crate supports all standard MLIR dialects including [func](https://mlir.llvm.org/docs/Dialects/Func/), [arith](https://mlir.llvm.org/docs/Dialects/ArithOps/), [scf](https://mlir.llvm.org/docs/Dialects/SCFDialect/), [tensor](https://mlir.llvm.org/docs/Dialects/TensorOps/), [memref](https://mlir.llvm.org/docs/Dialects/MemRef/), and [llvm](https://mlir.llvm.org/docs/Dialects/LLVM/), enabling progressive lowering from high-level abstractions to executable code. This multi-level approach allows compilers to perform optimizations at the most appropriate abstraction level, improving both compilation time and generated code quality.
 
 ## Installation on macOS
 
@@ -57,7 +57,7 @@ Creating constant values and arithmetic computations:
 #![function!("melior/src/lib.rs", create_constant)]
 ```
 
-The arith dialect provides integer and floating-point arithmetic operations. Constants are materialized using arith::constant operations, and computations build expression trees through operation chaining. Each operation produces results that subsequent operations consume, creating a dataflow graph representation.
+The [arith dialect](https://mlir.llvm.org/docs/Dialects/ArithOps/) provides integer and floating-point arithmetic operations. Constants are materialized using arith::constant operations, and computations build expression trees through operation chaining. Each operation produces results that subsequent operations consume, creating a dataflow graph representation.
 
 ## Type and Attribute Builders
 
@@ -101,19 +101,19 @@ MLIR's power comes from its transformation infrastructure. The PassManager orche
 
 ### Basic Transformations
 
-Canonicalizer simplifies IR by applying local pattern-based rewrites:
+[Canonicalizer](https://mlir.llvm.org/docs/Passes/#-canonicalize) simplifies IR by applying local pattern-based rewrites:
 
 ```rust
 #![function!("melior/src/lib.rs", apply_canonicalization)]
 ```
 
-Common Subexpression Elimination (CSE) removes redundant computations:
+[Common Subexpression Elimination (CSE)](https://mlir.llvm.org/docs/Passes/#-cse) removes redundant computations:
 
 ```rust
 #![function!("melior/src/lib.rs", apply_cse)]
 ```
 
-Sparse Conditional Constant Propagation (SCCP) performs constant folding and dead code elimination:
+[Sparse Conditional Constant Propagation (SCCP)](https://mlir.llvm.org/docs/Passes/#-sccp) performs constant folding and dead code elimination:
 
 ```rust
 #![function!("melior/src/lib.rs", apply_sccp)]
@@ -121,13 +121,13 @@ Sparse Conditional Constant Propagation (SCCP) performs constant folding and dea
 
 ### Function Optimizations
 
-Inlining replaces function calls with their bodies:
+[Inlining](https://mlir.llvm.org/docs/Passes/#-inline) replaces function calls with their bodies:
 
 ```rust
 #![function!("melior/src/lib.rs", apply_inlining)]
 ```
 
-Symbol DCE removes unused functions and global symbols:
+[Symbol DCE](https://mlir.llvm.org/docs/Passes/#-symbol-dce) removes unused functions and global symbols:
 
 ```rust
 #![function!("melior/src/lib.rs", apply_symbol_dce)]
@@ -135,7 +135,7 @@ Symbol DCE removes unused functions and global symbols:
 
 ### Loop Optimizations
 
-Loop-Invariant Code Motion (LICM) hoists invariant computations out of loops:
+[Loop-Invariant Code Motion (LICM)](https://mlir.llvm.org/docs/Passes/#-loop-invariant-code-motion) hoists invariant computations out of loops:
 
 ```rust
 #![function!("melior/src/lib.rs", apply_licm)]
@@ -143,7 +143,7 @@ Loop-Invariant Code Motion (LICM) hoists invariant computations out of loops:
 
 ### Memory Optimizations
 
-Promote memory allocations to SSA registers:
+Promote memory allocations to SSA registers using [mem2reg](https://mlir.llvm.org/docs/Passes/#-mem2reg):
 
 ```rust
 #![function!("melior/src/lib.rs", apply_mem2reg)]
@@ -151,7 +151,7 @@ Promote memory allocations to SSA registers:
 
 ### GPU Transformations
 
-Convert parallel patterns to GPU kernels:
+Convert parallel patterns to GPU kernels using [GPU dialect lowering](https://mlir.llvm.org/docs/Dialects/GPU/):
 
 ```rust
 #![function!("melior/src/lib.rs", convert_to_gpu)]
@@ -159,7 +159,7 @@ Convert parallel patterns to GPU kernels:
 
 ### Utility Passes
 
-Strip debug information for release builds:
+Strip debug information for release builds using [strip-debuginfo](https://mlir.llvm.org/docs/Passes/#-strip-debuginfo):
 
 ```rust
 #![function!("melior/src/lib.rs", strip_debug_info)]

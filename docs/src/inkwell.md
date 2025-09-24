@@ -89,7 +89,7 @@ Using alloca for local variables:
 #![function!("inkwell/src/lib.rs", create_alloca_function)]
 ```
 
-The alloca instruction creates stack storage for mutable variables. Load and store instructions access these variables. This pattern is commonly used before mem2reg optimization, which promotes allocas to SSA registers when possible.
+The alloca instruction creates stack storage for mutable variables. Load and store instructions access these variables. This pattern is commonly used before [mem2reg](https://llvm.org/docs/Passes.html#mem2reg-promote-memory-to-register) optimization, which promotes allocas to SSA registers when possible.
 
 ## Array Operations
 
@@ -147,7 +147,7 @@ Applying LLVM's optimization passes using the modern pass manager:
 #![function!("inkwell/src/lib.rs", run_custom_passes)]
 ```
 
-LLVM provides a modern pass manager (available in LLVM 18) with a string-based interface for specifying optimization pipelines. Common passes include instcombine, reassociate, gvn, simplifycfg, and mem2reg. The PassBuilderOptions allows fine-grained control over optimization behavior.
+LLVM provides a modern pass manager (available in LLVM 18) with a string-based interface for specifying optimization pipelines. Common passes include [instcombine](https://llvm.org/docs/Passes.html#instcombine-combine-redundant-instructions), [reassociate](https://llvm.org/docs/Passes.html#reassociate-reassociate-expressions), [gvn](https://llvm.org/docs/Passes.html#gvn-global-value-numbering), [simplifycfg](https://llvm.org/docs/Passes.html#simplifycfg-simplify-the-cfg), and [mem2reg](https://llvm.org/docs/Passes.html#mem2reg-promote-memory-to-register). The PassBuilderOptions allows fine-grained control over optimization behavior.
 
 ## JIT Compilation
 
