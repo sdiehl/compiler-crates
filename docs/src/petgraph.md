@@ -94,8 +94,6 @@ The DOT output can be rendered with Graphviz to visualize the graph structure, w
 
 ## Best Practices
 
-When using petgraph in compiler projects, consider these guidelines:
-
 Choose the appropriate graph type for your use case. Use `DiGraph` for directed graphs like CFGs and call graphs. Use `UnGraph` for undirected graphs like interference graphs in register allocation.
 
 Node indices are not stable across node removals. If you need stable identifiers, store them in the node weight or use a separate mapping. For large graphs, consider using `StableGraph` which maintains indices across removals at a small performance cost.

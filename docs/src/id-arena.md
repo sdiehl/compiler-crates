@@ -93,8 +93,6 @@ Arenas allocate memory in large chunks, reducing allocator overhead. All nodes a
 
 ## Best Practices
 
-When using id-arena in compiler projects, consider these guidelines:
-
 Structure your compiler with dedicated arenas for different types of data. Separate arenas for AST nodes, types, and IR allows independent manipulation and clearer ownership. Each compiler pass can create its own arenas for intermediate data.
 
 Use newtype wrappers around IDs when you have multiple arena types. While id-arena provides type safety through phantom types, additional newtype wrappers can prevent mixing IDs from different logical domains.

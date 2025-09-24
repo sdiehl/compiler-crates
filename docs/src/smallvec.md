@@ -82,8 +82,6 @@ Most errors have only one or two context levels, so inline storage of 2 elements
 
 ## Best Practices
 
-When using SmallVec in compiler projects, consider these guidelines:
-
 Choose inline capacity based on profiling and typical use cases. Too small wastes the optimization opportunity, while too large wastes stack space. Common sweet spots are 2-4 for AST children, 8-16 for local collections, and 32-64 for token buffers.
 
 Be aware of the size implications. A `SmallVec<[T; N]>` is approximately the size of N elements plus a discriminant and pointer. This can make structs larger, potentially affecting cache behavior. Measure the trade-offs in your specific use case.

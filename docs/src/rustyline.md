@@ -153,8 +153,6 @@ The helper struct implements all the necessary traits and maintains shared state
 
 ## Best Practices
 
-When using rustyline in compiler projects, consider these guidelines:
-
 Design commands that mirror your compiler's architecture. If your compiler has distinct phases like parsing, type checking, and code generation, provide commands to inspect the output of each phase. This helps users understand how their code flows through the compiler.
 
 Implement context-aware completion that understands your language's syntax. Beyond simple keyword completion, consider completing function names, type names, and module paths based on the current compilation context. This requires integration with your compiler's symbol tables.

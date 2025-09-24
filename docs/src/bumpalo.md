@@ -182,8 +182,6 @@ Bump allocation provides several performance advantages for compilers:
 
 ## Best Practices
 
-When using bumpalo in compiler projects, follow these guidelines:
-
 Structure your compiler passes to match arena lifetimes. Each major phase (parsing, type checking, optimization, code generation) can use its own arena that's dropped when the phase completes.
 
 Avoid storing bump-allocated values in long-lived data structures. The arena lifetime must outlive all references to its allocated values.

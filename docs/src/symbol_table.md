@@ -92,8 +92,6 @@ The benchmark demonstrates that global symbols have competitive performance with
 
 ## Best Practices
 
-When using symbol_table in compiler projects, consider these guidelines:
-
 Use `static_symbol!` for all keywords and operators known at compile time. This eliminates runtime interning overhead for the most common symbols. Create a module specifically for language keywords to centralize these definitions.
 
 Prefer `GlobalSymbol` over local `SymbolTable` in multi-threaded compilers. The global approach simplifies code and enables better parallelization. Local tables only make sense for isolated processing with no symbol sharing.

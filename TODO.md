@@ -24,7 +24,7 @@
 - [ ] rustemo
 - [ ] grmtools
 - [x] chumsky             Parser combinator library with error recovery
-- [x] peg                 Inline PEG parser generator
+- [ ] peg                 Inline PEG parser generator
 - [x] combine
 - [x] rust_sitter
 - [x] codespan

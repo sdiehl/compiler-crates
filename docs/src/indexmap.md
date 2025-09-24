@@ -76,8 +76,6 @@ This generic scope structure can track any kind of bindings while preserving ord
 
 ## Best Practices
 
-When using IndexMap in compiler projects, consider these guidelines:
-
 Use IndexMap for any collection where iteration order matters for correctness or user experience. This includes symbol tables, type definitions, struct fields, function parameters, and import lists. The small overhead compared to HashMap is usually negligible compared to the benefits of deterministic behavior.
 
 Leverage both map and index access patterns. IndexMap allows you to look up entries by key in O(1) time and also access them by position. This is useful for positional parameters, struct field offsets, and anywhere you need both named and indexed access.
