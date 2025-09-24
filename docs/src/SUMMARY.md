@@ -4,35 +4,44 @@
 
 [Terminology](./terminology.md)
 
-# Parsing
+# Parsing & Lexing
+
 * [Comparison](./parsing-comparison.md)
-- [logos](./logos.md)
-- [lalrpop](./lalrpop.md)
 - [chumsky](./chumsky.md)
-- [pest](./pest.md)
-- [nom](./nom.md)
 - [combine](./combine.md)
-- [winnow](./winnow.md)
-- [rustc_lexer](./rustc_lexer.md)
+- [lalrpop](./lalrpop.md)
+- [logos](./logos.md)
+- [nom](./nom.md)
+- [peg](./peg.md)
+- [pest](./pest.md)
 - [rowan](./rowan.md)
 - [rust_sitter](./rust_sitter.md)
+- [rustc_lexer](./rustc_lexer.md)
+- [winnow](./winnow.md)
+
+# Parser Utilities
+
+- [nom_locate](./nom_locate.md)
+- [proc-macro2](./proc-macro2.md)
+- [quote](./quote.md)
+- [syn](./syn.md)
 
 # Diagnostics
 
-- [codespan-reporting](./codespan-reporting.md)
 - [ariadne](./ariadne.md)
+- [codespan-reporting](./codespan-reporting.md)
 - [miette](./miette.md)
 
 # Data Structures
 
-- [id-arena](./id-arena.md)
+- [bitflags](./bitflags.md)
 - [bumpalo](./bumpalo.md)
+- [id-arena](./id-arena.md)
 - [indexmap](./indexmap.md)
 - [smallvec](./smallvec.md)
-- [bitflags](./bitflags.md)
 - [symbol_table](./symbol_table.md)
 
-# Analysis
+# Analysis & Algorithms
 
 - [petgraph](./petgraph.md)
 
@@ -42,15 +51,10 @@
 - [inkwell](./inkwell.md)
 - [melior](./melior.md)
 
-# Utilities
+# Development Tools
 
-- [syn](./syn.md)
-- [quote](./quote.md)
-- [proc-macro2](./proc-macro2.md)
-- [malachite](./malachite.md)
-- [nom_locate](./nom_locate.md)
-- [rustyline](./rustyline.md)
 - [codespan](./codespan.md)
+- [rustyline](./rustyline.md)
 
 ---
 
