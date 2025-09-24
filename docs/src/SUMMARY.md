@@ -22,7 +22,6 @@
 # Parser Utilities
 
 - [nom_locate](./nom_locate.md)
-- [proc-macro2](./proc-macro2.md)
 - [quote](./quote.md)
 - [syn](./syn.md)
 

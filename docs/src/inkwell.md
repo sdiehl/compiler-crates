@@ -8,15 +8,11 @@ The architecture of inkwell mirrors LLVM's conceptual model while providing Rust
 
 Inkwell currently supports LLVM versions 8 through 18. You must have LLVM installed on your system and specify the version in your `Cargo.toml` dependencies.
 
-### macOS Installation
-
-Install LLVM 18 using Homebrew:
+On macOS, you can use Homebrew to install LLVM. For example, to install LLVM 18:
 
 ```bash
 brew install llvm@18
 ```
-
-### Cargo Configuration
 
 Add inkwell to your `Cargo.toml` with the appropriate LLVM version feature flag:
 
@@ -26,16 +22,6 @@ inkwell = { version = "0.6.0", features = ["llvm18-1"] }
 ```
 
 Supported versions use the pattern `llvmM-0` where M is the LLVM major version (8-18).
-
-### Environment Setup
-
-On macOS, you may need to set environment variables to help the build system find LLVM:
-
-```bash
-export LLVM_SYS_180_PREFIX=$(brew --prefix llvm@18)
-```
-
-Note: The environment variable format is `LLVM_SYS_<version>_PREFIX` where version is the LLVM version without dots (e.g., 180 for LLVM 18.0).
 
 ## Basic Usage
 

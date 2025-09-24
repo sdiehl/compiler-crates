@@ -9,7 +9,7 @@ Location tracking enables compilers to provide helpful error messages that show 
 The foundation of nom_locate is the `LocatedSpan` type, typically aliased for convenience:
 
 ```rust
-#![type!("nom-locate/src/lib.rs", Span)]
+type Span<'a> = LocatedSpan<&'a str>;
 ```
 
 ```rust
@@ -94,55 +94,7 @@ Handling operator precedence while maintaining location information:
 
 The parser correctly handles precedence while tracking the span of entire expressions and their sub-components.
 
-## Function Call Parsing
-
-Parsing function applications with argument locations:
-
-Function calls track both the function name location and each argument's position for detailed error reporting.
-
-## Let Expression Parsing
-
-Structured expressions with keyword and binding locations:
-
-Let expressions demonstrate tracking locations across multiple components of a complex expression.
-
-## Multi-line Input Handling
-
-nom_locate correctly handles newlines and multi-line input:
-
-Line and column tracking automatically accounts for newlines, maintaining accurate positions across line boundaries.
-
-## Advanced Location Features
-
-nom_locate provides several utilities for location manipulation:
-
-```rust
-#![test!("nom-locate/src/lib.rs", test_location_tracking)]
-```
-
-These tests demonstrate how location information flows through the parsing process and remains accurate even with complex nested structures.
-
-## Integration with Error Recovery
-
-Location information enhances error recovery strategies:
-
-When parsing fails, the location information helps determine where to resume parsing, enabling better error recovery in the presence of syntax errors.
-
-## Performance Considerations
-
-nom_locate adds minimal overhead to parsing:
-
-**Memory**: Each span carries a pointer to the original input plus offset metadata. This is typically 16-24 bytes per span on 64-bit systems.
-
-**CPU**: Location tracking adds simple arithmetic operations to calculate line and column numbers. The overhead is negligible compared to parsing logic.
-
-**Caching**: Line number calculations can be cached for frequently accessed positions using a line offset table.
-
-**Incremental**: Location information supports incremental parsing by providing stable positions across edits.
-
 ## Best Practices
-
-Structure your parser to maximize the benefits of location tracking:
 
 Preserve spans throughout AST construction. Don't extract the inner value and discard location information until absolutely necessary.
 
