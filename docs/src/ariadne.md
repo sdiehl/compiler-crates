@@ -77,5 +77,3 @@ Write error messages that teach. Instead of just saying what's wrong, explain wh
 Consider error recovery when designing diagnostics. If you can guess what the user meant, include that in help text. For example, if they typed "fucntion" instead of "function", suggest the correction.
 
 Group related errors when they have a common cause. If a type error in one function causes errors in its callers, present them as a single diagnostic with multiple labels rather than separate errors.
-
-The combination of clear visual design and thoughtful error messages makes ariadne an excellent choice for modern compiler projects. Its focus on user experience aligns well with Rust's philosophy of helpful error messages.

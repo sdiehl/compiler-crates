@@ -193,5 +193,3 @@ Reset and reuse arenas when processing multiple compilation units. This amortize
 Consider using multiple arenas for different lifetimes. For example, use one arena for the AST that lives through type checking, and another for temporary values during each optimization pass.
 
 Profile your allocator usage to find the optimal chunk size. Larger chunks mean fewer allocations from the system allocator but potentially more wasted space.
-
-The bumpalo crate provides a powerful tool for improving compiler performance through efficient memory management. By embracing the constraints of arena allocation - no individual deallocation - you can achieve significant performance improvements while simplifying lifetime management in your compiler implementation.

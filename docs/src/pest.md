@@ -135,5 +135,3 @@ Version control grammar files alongside implementation code. Document grammar ch
 Profile parser performance on representative input to identify bottlenecks. Complex backtracking patterns or excessive rule nesting can impact performance. Use pest's built-in debugging features to understand parsing behavior on problematic input.
 
 Handle errors gracefully with informative messages. Pest's automatic error reporting provides good default messages, but custom errors can add domain-specific context. Consider recovery strategies for IDE integration where partial results are valuable.
-
-The combination of pest's declarative grammar syntax, automatic parser generation, and excellent error reporting makes it ideal for domain-specific languages, configuration formats, and programming language prototypes. The separation of grammar and implementation encourages clean parser design that closely matches formal language specifications.

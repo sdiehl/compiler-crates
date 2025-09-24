@@ -374,5 +374,3 @@ Use typed ASTs to catch errors at compile time. The type system ensures grammar 
 Test grammars thoroughly with both valid and invalid input. LALRPOP's error reporting helps debug grammar issues, but comprehensive tests ensure the parser accepts the intended language.
 
 Profile parser performance on realistic input. While LALRPOP generates efficient parsers, grammar structure affects performance. Minimize ambiguity and left-factorize common prefixes when performance matters.
-
-The combination of LALRPOP's powerful grammar language, excellent error messages, and efficient generated code makes it ideal for production compiler implementations. The traditional parser generator approach provides familiarity for developers experienced with other parsing tools while leveraging Rust's safety and performance advantages.

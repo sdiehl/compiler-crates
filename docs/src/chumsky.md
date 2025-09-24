@@ -93,5 +93,3 @@ Test parsers thoroughly with both valid and invalid input. Error recovery strate
 Profile parser performance on realistic input to identify bottlenecks. Complex lookahead or backtracking can dramatically impact performance. Consider using a separate lexer for languages with complex tokenization rules.
 
 Document grammar ambiguities and their resolution strategies. Explain why certain parser structures were chosen, especially for complex precedence hierarchies. Provide examples of valid and invalid syntax to clarify language rules.
-
-The combination of chumsky's expressive combinator library, excellent error recovery, and integration with Rust's type system makes it ideal for building parsers for domain-specific languages, configuration formats, and programming language prototypes. The functional approach encourages modular, testable parser implementations that can evolve with language requirements.

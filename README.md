@@ -13,53 +13,53 @@ A collection of minimal Rust examples focused on compiler development.
 
 ### Parsing & Lexing
 
-- [**chumsky**](./chumsky/src/lib.rs) - Parser combinator library with excellent error recovery
-- [**combine**](./combine/src/lib.rs) - Parser combinators with zero-copy mode for performance
-- [**lalrpop**](./lalrpop/src/lib.rs) - LR(1) parser generator with powerful grammar syntax
-- [**logos**](./logos/src/lib.rs) - Fast, derive-based lexer generation
-- [**nom**](./nom/src/lib.rs) - High-performance parser combinators for binary and text formats
-- [**peg**](./peg/src/lib.rs) - Parsing expression grammar with inline syntax
-- [**pest**](./pest/src/lib.rs) - PEG parser generator with elegant grammar files
-- [**rowan**](./rowan/src/lib.rs) - Lossless syntax trees with incremental reparsing
-- [**rust_sitter**](./rust_sitter/src/lib.rs) - Tree-sitter grammar generation through Rust macros
-- [**rustc_lexer**](./rustc_lexer/src/lib.rs) - The actual lexer used by the Rust compiler
-- [**winnow**](./winnow/src/lib.rs) - Parser combinators with a focus on maintainability
+- [**chumsky**](./chumsky/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/chumsky.html) - Parser combinator library with excellent error recovery
+- [**combine**](./combine/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/combine.html) - Parser combinators with zero-copy mode for performance
+- [**lalrpop**](./lalrpop/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/lalrpop.html) - LR(1) parser generator with powerful grammar syntax
+- [**logos**](./logos/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/logos.html) - Fast, derive-based lexer generation
+- [**nom**](./nom/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/nom.html) - High-performance parser combinators for binary and text formats
+- [**peg**](./peg/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/peg.html) - Parsing expression grammar with inline syntax
+- [**pest**](./pest/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/pest.html) - PEG parser generator with elegant grammar files
+- [**rowan**](./rowan/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/rowan.html) - Lossless syntax trees with incremental reparsing
+- [**rust_sitter**](./rust_sitter/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/rust_sitter.html) - Tree-sitter grammar generation through Rust macros
+- [**rustc_lexer**](./rustc_lexer/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/rustc_lexer.html) - The actual lexer used by the Rust compiler
+- [**winnow**](./winnow/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/winnow.html) - Parser combinators with a focus on maintainability
 
 ### Parser Utilities
 
-- [**nom_locate**](./nom_locate/src/lib.rs) - Location tracking for nom parsers
-- [**quote**](./quote/src/lib.rs) - Quasi-quoting for Rust code generation
-- [**syn**](./syn/src/lib.rs) - Rust syntax tree parsing and manipulation for procedural macros
+- [**nom_locate**](./nom_locate/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/nom_locate.html) - Location tracking for nom parsers
+- [**quote**](./quote/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/quote.html) - Quasi-quoting for Rust code generation
+- [**syn**](./syn/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/syn.html) - Rust syntax tree parsing and manipulation for procedural macros
 
 ### Diagnostics
 
-- [**ariadne**](./ariadne/src/lib.rs) - Modern diagnostic reporting with emphasis on clarity
-- [**codespan-reporting**](./codespan-reporting/src/lib.rs) - Beautiful compiler error messages with source snippets
-- [**miette**](./miette/src/lib.rs) - Comprehensive diagnostic framework with derive macros
+- [**ariadne**](./ariadne/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/ariadne.html) - Modern diagnostic reporting with emphasis on clarity
+- [**codespan-reporting**](./codespan-reporting/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/codespan-reporting.html) - Beautiful compiler error messages with source snippets
+- [**miette**](./miette/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/miette.html) - Comprehensive diagnostic framework with derive macros
 
 ### Data Structures
 
-- [**bitflags**](./bitflags/src/lib.rs) - Type-safe bitmask flags for compiler IR and AST nodes
-- [**bumpalo**](./bumpalo/src/lib.rs) - Fast bump allocation arena for compiler data structures
-- [**id-arena**](./id-arena/src/lib.rs) - Efficient arena allocation for AST and IR nodes
-- [**indexmap**](./indexmap/src/lib.rs) - Order-preserving hash maps for symbol tables
-- [**smallvec**](./smallvec/src/lib.rs) - Stack-allocated vectors for performance-critical paths
-- [**symbol_table**](./symbol_table/src/lib.rs) - String interning for compiler symbols
+- [**bitflags**](./bitflags/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/bitflags.html) - Type-safe bitmask flags for compiler IR and AST nodes
+- [**bumpalo**](./bumpalo/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/bumpalo.html) - Fast bump allocation arena for compiler data structures
+- [**id-arena**](./id-arena/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/id-arena.html) - Efficient arena allocation for AST and IR nodes
+- [**indexmap**](./indexmap/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/indexmap.html) - Order-preserving hash maps for symbol tables
+- [**smallvec**](./smallvec/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/smallvec.html) - Stack-allocated vectors for performance-critical paths
+- [**symbol_table**](./symbol_table/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/symbol_table.html) - String interning for compiler symbols
 
 ### Analysis & Algorithms
 
-- [**petgraph**](./petgraph/src/lib.rs) - Graph algorithms for control flow and dependency analysis
+- [**petgraph**](./petgraph/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/petgraph.html) - Graph algorithms for control flow and dependency analysis
 
 ### Code Generation
 
-- [**cranelift**](./cranelift/src/lib.rs) - Fast JIT code generator for WebAssembly and language runtimes
-- [**inkwell**](./inkwell/src/lib.rs) - Safe LLVM bindings for generating optimized machine code
-- [**melior**](./melior/src/lib.rs) - MLIR bindings for multi-level IR compilation
+- [**cranelift**](./cranelift/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/cranelift.html) - Fast JIT code generator for WebAssembly and language runtimes
+- [**inkwell**](./inkwell/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/inkwell.html) - Safe LLVM bindings for generating optimized machine code
+- [**melior**](./melior/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/melior.html) - MLIR bindings for multi-level IR compilation
 
 ### Development Tools
 
-- [**codespan**](./codespan/src/lib.rs) - Core span tracking and position management for compilers
-- [**rustyline**](./rustyline/src/lib.rs) - Line editing for REPL implementations
+- [**codespan**](./codespan/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/codespan.html) - Core span tracking and position management for compilers
+- [**rustyline**](./rustyline/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/rustyline.html) - Line editing for REPL implementations
 
 ### Build Commands
 

@@ -206,5 +206,3 @@ Enable appropriate optimization levels based on use case. Debug builds benefit f
 Use LLVM intrinsics for operations with hardware support. Intrinsics for mathematical functions, atomic operations, and SIMD instructions generate better code than manual implementations. LLVM recognizes and optimizes intrinsic patterns.
 
 Profile and analyze generated code to identify optimization opportunities. LLVM provides extensive analysis passes that reveal performance bottlenecks. Use this information to guide both frontend improvements and optimization pass selection.
-
-The inkwell bindings make LLVM's powerful code generation infrastructure accessible to Rust developers while maintaining memory safety and type safety. The combination of LLVM's mature optimization technology and Rust's safety guarantees provides an ideal platform for building high-performance compilers.

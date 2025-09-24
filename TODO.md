@@ -1,30 +1,30 @@
-- [x] syn                 Turns Rust source into an abstract syntax tree (AST); indispensable for procedural-macro–style front-ends.
-- [x] quote               Generates Rust code from templates ("quasi-quoting"), keeping tokens and formatting intact .
-- [x] nom                 High-performance parser-combinator library for binary or text grammars .
-- [x] pest                PEG-based parser generator with a declarative grammar syntax .
-- [x] lalrpop             LR(1)/LALR(1) parser generator that emits Rust code and separates lexer/grammar phases .
-- [x] logos               Derives fast, table-driven lexers from simple #[derive] annotations .
-- [x] rustc_lexer         The standalone UTF-8 lexer used by rustc; handy for Rust-like languages or tooling .
-- [x] rowan               "Red-green" immutable syntax-tree library (used by rust-analyzer) that makes incremental reparsing easy.
-- [x] codespan-reporting  Emits colourful, IDE-style diagnostic messages (file/line/column snippets, labels, notes).
-- [x] ariadne             Error diagnostic reporting
-- [x] miette              Higher-level diagnostics framework that layers on rich error contexts and suggestions.
-- [x] id-arena            Simple, type-safe arena allocator that gives every node a compact numeric ID—great for ASTs or IRs.
-- [x] bumpalo             Fast bump-allocation arena; ideal for short-lived compiler data structures.
-- [x] indexmap            Hash map that preserves insertion order, useful for deterministic symbol tables.
-- [x] smallvec            Vector that stores small lengths inline, reducing allocations in tight compiler loops.
-- [x] bitflags            Generates type-safe bitmask structs for IR flags or access-modifier sets.
-- [x] petgraph            Generic graph library: control-flow graphs, call graphs, dominance trees, etc., come for free.
-- [x] cranelift           Stand-alone code generator you can embed as a back-end.
-- [x] inkwell             Safe wrapper around LLVM's C API for building and optimising LLVM IR.
-- [x] melior              MLIR Bindings
+- [x] syn
+- [x] quote
+- [x] nom
+- [x] pest
+- [x] lalrpop
+- [x] logos
+- [x] rustc_lexer
+- [x] rowan
+- [x] codespan-reporting
+- [x] ariadne
+- [x] miette
+- [x] id-arena
+- [x] bumpalo
+- [x] indexmap
+- [x] smallvec
+- [x] bitflags
+- [x] petgraph
+- [x] cranelift
+- [x] inkwell
+- [x] melior
 - [x] symbol_table
-- [x] nom_locate          Location tracking for nom parsers
+- [x] nom_locate
 - [x] rustyline
 - [ ] rustemo
 - [ ] grmtools
-- [x] chumsky             Parser combinator library with error recovery
-- [x] peg                 Inline PEG parser generator
+- [x] chumsky
+- [x] peg
 - [x] combine
 - [x] rust_sitter
 - [x] codespan

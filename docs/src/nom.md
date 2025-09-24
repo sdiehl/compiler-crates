@@ -133,5 +133,3 @@ Profile parsers on representative input to identify performance bottlenecks. Com
 Handle errors gracefully with appropriate error types. The `VerboseError` type aids development, while custom error types provide better user experience. Use `context` and `cut` to improve error messages.
 
 Document the grammar alongside the parser implementation. Comments should explain the grammatical constructs being parsed and any deviations from standard grammar notation. Examples of valid input clarify the parser's behavior.
-
-The combination of nom's performance, composability, and support for various input types makes it ideal for parsing network protocols, file formats, and domain-specific languages. The functional approach encourages modular parser design that scales from simple expressions to complex languages.

@@ -200,5 +200,3 @@ Use MLIR's type system to enforce invariants. Rich types catch errors early and 
 Implement verification for custom operations. Verification catches IR inconsistencies early and provides better error messages. Well-verified IR enables aggressive optimizations without compromising correctness.
 
 Build reusable transformation patterns. Patterns that match common idioms enable optimization across different contexts. Parameterize patterns to handle variations while maintaining transformation correctness.
-
-The melior bindings make MLIR's powerful infrastructure accessible to Rust developers, enabling construction of sophisticated optimizing compilers with modern tooling and safety guarantees. The combination of multiple abstraction levels, extensible dialects, and powerful optimization infrastructure provides a solid foundation for next-generation compiler development.

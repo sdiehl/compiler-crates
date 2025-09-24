@@ -133,5 +133,3 @@ Structure IR generation to minimize variable live ranges, reducing register pres
 Profile compilation time to identify bottlenecks, particularly in function builder usage patterns. Large functions may benefit from splitting into smaller units that compile independently. Consider caching compiled code when possible to amortize compilation costs across multiple executions.
 
 Design the IR generation to preserve high-level semantics where possible. Cranelift's optimizer works best when the intent of operations is clear, such as using specific instructions for bounds checks rather than generic comparisons.
-
-The combination of fast compilation, reasonable code quality, and production-ready robustness makes Cranelift an excellent choice for JIT compilation scenarios. Its clean API and predictable performance characteristics simplify integration into language implementations while providing sufficient performance for real-world applications.
