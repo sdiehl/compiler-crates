@@ -105,7 +105,7 @@ The extras field is accessible in token callbacks, allowing the lexer to maintai
 
 ## Performance Characteristics
 
-Logos generates table-driven DFAs that process input in linear time with minimal branching. The generated code uses Rust's zero-cost abstractions effectively, with performance comparable to hand-written lexers. Benchmarks show throughput of 50-200 MB/s on modern hardware, depending on token complexity.
+Logos generates table-driven DFAs that process input in linear time with minimal branching. The generated code uses Rust's zero-cost abstractions effectively, with performance comparable to hand-written lexers.
 
 The lexer allocates only for captured token data like identifiers and string literals. Token matching itself is allocation-free, making logos suitable for incremental lexing in language servers where performance is critical.
 

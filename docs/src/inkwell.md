@@ -174,8 +174,6 @@ This helper simplifies creating function types with proper handling of void retu
 
 ## Best Practices
 
-When building compilers with inkwell, follow these architectural principles:
-
 Maintain clear separation between your language's AST and LLVM IR generation. Build an intermediate representation that bridges your language semantics and LLVM's model. This separation simplifies both frontend development and backend optimization.
 
 Use LLVM's type system to enforce invariants at compile time. Rich type information enables better optimization and catches errors early. Avoid using opaque pointers when specific types provide better optimization opportunities.

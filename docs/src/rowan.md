@@ -110,8 +110,6 @@ Tree traversal functions enable common IDE operations like finding the syntax no
 
 ## Best Practices
 
-When implementing parsers with rowan, consider these architectural principles:
-
 Design your syntax kinds hierarchy to balance granularity with usability. Too few kinds make the tree difficult to analyze, while too many create unnecessary complexity. Group related tokens into categories like operators or keywords when they behave similarly in the grammar.
 
 Implement error recovery in the parser to produce valid trees even for incorrect input. Skip unexpected tokens rather than failing completely, and use error nodes to mark problematic regions. This approach enables IDE features to work on incomplete or incorrect code.

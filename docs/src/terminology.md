@@ -30,6 +30,8 @@ The **parser** consumes tokens and constructs a tree structure representing the 
 
 The **semantic analyzer** traverses the parse tree to determine meaning. It builds symbol tables mapping names to their declarations, checks that types match correctly, and verifies that the program follows all language rules not captured by the grammar. This phase transforms a syntactically valid program into a semantically valid one.
 
+A **type checker** is often an integral part of semantic analysis. It ensures that operations are applied to compatible types, infers types where possible, and enforces language-specific type rules. Type checking can be simple in dynamically-typed languages or complex in statically-typed languages with features like generics and polymorphism. See my [Typechecker Zoo](https://sdiehl.github.io/typechecker-zoo/) writeup for more details on this phase.
+
 Finally, the front end generates its **intermediate representation**. A well-designed IR captures all source program semantics while adding explicit information about types, control flow, and data dependencies that later phases need. The IR might resemble the parse tree, use three-address code, employ static single assignment form, or adopt more exotic representations.
 
 ## Middle End Processing
