@@ -10,6 +10,8 @@ The guide focuses on practical, compiler-specific use cases for each crate. Rath
 
 We're sharing this publicly in the hope that others building compilers in Rust will find it useful. The examples are intentionally concise and focused on compiler engineering tasks. All code is tested and ready to use as a starting point for your own implementations.
 
+The source code for all examples in this guide is available at [https://github.com/sdiehl/compiler-crates](https://github.com/sdiehl/compiler-crates).
+
 ## Technology Stacks
 
 Choosing the right combination of crates can significantly impact your compiler project's success. Here are our recommendations based on different use cases and experience levels.
