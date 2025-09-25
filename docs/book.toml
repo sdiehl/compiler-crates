@@ -6,6 +6,9 @@ src = "src"
 title = "Compiler Crates"
 description = "Some notes about crates that are useful for building compilers in Rust."
 
+[rust]
+edition = "2021"
+
 [preprocessor.include-rs]
 base-dir = ".."
 
@@ -21,6 +24,9 @@ copy-fonts = true
 additional-css = ["src/custom.css"]
 favicon = "src/lean.png"
 additional-js = ["src/favicon.js"]
+git-repository-url = "https://github.com/sdiehl/compiler-crates"
+edit-url-template = "https://github.com/sdiehl/compiler-crates/edit/main/docs/{path}"
+hash-files = true
 
 [output.html.search]
 enable = true
@@ -34,7 +40,7 @@ expand = true
 heading-split-level = 3
 
 [output.html.fold]
-enable = false
+enable = true
 level = 0
 
 [output.html.playground]
