@@ -45,6 +45,14 @@ pub mod arithmetic {
         #[rust_sitter::prec(4)]
         Neg(#[rust_sitter::leaf(text = "-")] (), Box<Expr>),
     }
+
+    /// Whitespace can appear anywhere and is ignored
+    #[rust_sitter::extra]
+    #[allow(dead_code)]
+    struct Whitespace {
+        #[rust_sitter::leaf(pattern = r"\s")]
+        _whitespace: (),
+    }
 }
 
 /// Simple S-expression grammar
@@ -83,6 +91,21 @@ pub mod s_expression {
         pub value: String,
         #[rust_sitter::leaf(text = "\"")]
         _close: (),
+    }
+
+    /// Whitespace and comments are extras
+    #[rust_sitter::extra]
+    #[allow(dead_code)]
+    struct Whitespace {
+        #[rust_sitter::leaf(pattern = r"[ \t\n\r]+")]
+        _whitespace: (),
+    }
+
+    #[rust_sitter::extra]
+    #[allow(dead_code)]
+    struct Comment {
+        #[rust_sitter::leaf(pattern = r";[^\n]*")]
+        _comment: (),
     }
 }
 
@@ -153,6 +176,21 @@ pub mod config {
         pub items: Vec<Value>,
         #[rust_sitter::leaf(text = "]")]
         _close: (),
+    }
+
+    /// Whitespace and comments
+    #[rust_sitter::extra]
+    #[allow(dead_code)]
+    struct Whitespace {
+        #[rust_sitter::leaf(pattern = r"[ \t]+")]
+        _whitespace: (),
+    }
+
+    #[rust_sitter::extra]
+    #[allow(dead_code)]
+    struct Comment {
+        #[rust_sitter::leaf(pattern = r"#[^\n]*")]
+        _comment: (),
     }
 }
 
