@@ -18,6 +18,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUST_NIGHTLY_VERSION: nightly-2025-03-03
 
 jobs:
   test:
@@ -30,8 +31,11 @@ jobs:
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: nightly-2025-03-03
+          toolchain: ${{ env.RUST_NIGHTLY_VERSION }}
           components: rustfmt, clippy
+
+      - name: Check formatting
+        run: cargo +${{ env.RUST_NIGHTLY_VERSION }} fmt --all --check
 
       - name: Add LLVM repository and key
         run: |
@@ -68,9 +72,6 @@ jobs:
 
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
-
-      - name: Check formatting
-        run: cargo +nightly-2025-03-03 fmt --all --check
 
       - name: Run clippy
         run: cargo clippy --all -- -D warnings
