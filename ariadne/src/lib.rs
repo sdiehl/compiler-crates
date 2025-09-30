@@ -126,7 +126,7 @@ impl CompilerDiagnostic {
                 expected_span,
                 context,
             } => {
-                let mut report = Report::build(ReportKind::Error, "file", expr_span.start)
+                let mut report = Report::build(ReportKind::Error, ("file", expr_span.clone()))
                     .with_message(format!("Type mismatch in {}", context))
                     .with_label(
                         Label::new(("file", expr_span.clone()))
@@ -161,7 +161,7 @@ impl CompilerDiagnostic {
                 similar_names,
                 imported_modules,
             } => {
-                let mut report = Report::build(ReportKind::Error, "file", span.start)
+                let mut report = Report::build(ReportKind::Error, ("file", span.clone()))
                     .with_message(format!("Cannot find '{}' in scope", name))
                     .with_label(
                         Label::new(("file", span.clone()))
@@ -194,7 +194,7 @@ impl CompilerDiagnostic {
                 expected,
                 note,
             } => {
-                let mut report = Report::build(ReportKind::Error, "file", span.start)
+                let mut report = Report::build(ReportKind::Error, ("file", span.clone()))
                     .with_message("Syntax error")
                     .with_label(
                         Label::new(("file", span.clone()))
@@ -239,7 +239,7 @@ impl CompilerDiagnostic {
                     ("immutable", Color::Blue)
                 };
 
-                Report::build(ReportKind::Error, "file", second_borrow.start)
+                Report::build(ReportKind::Error, ("file", second_borrow.clone()))
                     .with_message(format!("Cannot borrow '{}' as {}", var_name, second_kind))
                     .with_label(
                         Label::new(("file", first_borrow.clone()))
@@ -260,7 +260,7 @@ impl CompilerDiagnostic {
 
             CompilerDiagnostic::CyclicDependency { modules } => {
                 let mut colors = ColorGenerator::new();
-                let mut report = Report::build(ReportKind::Error, "module", modules[0].1.start)
+                let mut report = Report::build(ReportKind::Error, ("module", modules[0].1.clone()))
                     .with_message("Cyclic module dependency detected");
 
                 for (i, (module, span)) in modules.iter().enumerate() {
@@ -364,7 +364,7 @@ pub fn error_report(
     message: &str,
     label_msg: &str,
 ) -> Report<'static, (&'static str, Range<usize>)> {
-    Report::build(ReportKind::Error, "static", span.start)
+    Report::build(ReportKind::Error, ("static", span.clone()))
         .with_message(message)
         .with_label(
             Label::new(("static", span))
@@ -381,7 +381,7 @@ pub fn warning_report(
     message: &str,
     label_msg: &str,
 ) -> Report<'static, (&'static str, Range<usize>)> {
-    Report::build(ReportKind::Warning, "static", span.start)
+    Report::build(ReportKind::Warning, ("static", span.clone()))
         .with_message(message)
         .with_label(
             Label::new(("static", span))

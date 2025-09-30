@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-ariadne = "0.4"
+ariadne = "0.5"
 yansi = "1.0"
 
 [lints]

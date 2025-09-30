@@ -170,7 +170,7 @@ fn main() {
     );
 
     // For multi-file errors, create a report directly
-    let diagnostic = Report::build(ReportKind::Error, "main.rs", 71)
+    let diagnostic = Report::build(ReportKind::Error, ("main.rs", 71..73))
         .with_message("Multiple type errors in struct initialization")
         .with_label(
             Label::new(("main.rs", 71..73))
@@ -231,7 +231,7 @@ impl Display for Point {
 
     let mut colors = ColorGenerator::new();
 
-    Report::build(ReportKind::Error, "traits.rs", 134)
+    Report::build(ReportKind::Error, ("traits.rs", 134..180))
         .with_message("Duplicate trait implementation")
         .with_label(
             Label::new(("traits.rs", 75..135))
