@@ -26,14 +26,16 @@ pub fn generate_hello_world() -> ExecutableBuffer {
     );
 
     // Generate the function that prints the string
+    // Load the 64-bit function address in chunks (16 bits at a time)
+    let print_addr = print as *const () as usize;
     dynasm!(ops
         ; .arch aarch64
         ; adr x0, ->hello                 // Load string address into first arg (ARM64 ABI)
         ; mov w1, string.len() as u32     // Load string length into second arg
-        ; movz x2, (print as usize as u64) as u32
-        ; movk x2, (print as usize as u64 >> 16) as u32, lsl 16
-        ; movk x2, (print as usize as u64 >> 32) as u32, lsl 32
-        ; movk x2, (print as usize as u64 >> 48) as u32, lsl 48
+        ; movz x2, (print_addr & 0xFFFF) as u32
+        ; movk x2, ((print_addr >> 16) & 0xFFFF) as u32, lsl 16
+        ; movk x2, ((print_addr >> 32) & 0xFFFF) as u32, lsl 32
+        ; movk x2, ((print_addr >> 48) & 0xFFFF) as u32, lsl 48
         ; blr x2                          // Call the print function
         ; ret                             // Return
     );
@@ -212,54 +214,134 @@ where
 }
 
 #[cfg(test)]
-#[allow(unused_unsafe)]
 mod tests {
-    use std::mem;
-
     use super::*;
 
-    #[test]
-    fn test_add_function() {
-        let code = generate_add_function();
-        let add_fn: extern "C" fn(i32, i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
+    // Tests that verify code generation works without executing
+    mod generation {
+        use super::*;
 
-        assert_eq!(unsafe { add_fn(5, 3) }, 8);
-        assert_eq!(unsafe { add_fn(-10, 20) }, 10);
+        #[test]
+        fn test_add_function_generation() {
+            let code = generate_add_function();
+            // Verify that code was generated (non-empty buffer)
+            assert!(!code.is_empty());
+            // ARM64 instructions are 4 bytes each
+            assert_eq!(code.len() % 4, 0);
+        }
+
+        #[test]
+        fn test_factorial_generation() {
+            let code = generate_factorial();
+            assert!(!code.is_empty());
+            assert_eq!(code.len() % 4, 0);
+            // Factorial should generate more code due to recursion logic
+            assert!(code.len() > 20);
+        }
+
+        #[test]
+        fn test_array_sum_generation() {
+            let code = generate_array_sum();
+            assert!(!code.is_empty());
+            assert_eq!(code.len() % 4, 0);
+        }
+
+        #[test]
+        fn test_multiply_by_constant_generation() {
+            // Test power of two (uses shift) - should generate less code
+            let code_pow2 = generate_multiply_by_constant(8);
+            assert!(!code_pow2.is_empty());
+            assert_eq!(code_pow2.len() % 4, 0);
+
+            // Test non-power of two (uses mul) - might generate slightly more code
+            let code_regular = generate_multiply_by_constant(7);
+            assert!(!code_regular.is_empty());
+            assert_eq!(code_regular.len() % 4, 0);
+        }
+
+        #[test]
+        fn test_vector_add_generation() {
+            let code = generate_vector_add();
+            assert!(!code.is_empty());
+            assert_eq!(code.len() % 4, 0);
+        }
+
+        #[test]
+        fn test_memcpy_generation() {
+            let code = generate_memcpy();
+            assert!(!code.is_empty());
+            assert_eq!(code.len() % 4, 0);
+        }
+
+        #[test]
+        #[cfg(target_arch = "aarch64")]
+        fn test_hello_world_generation() {
+            let code = generate_hello_world();
+            assert!(!code.is_empty());
+            // Should include both the string data and the code
+            assert!(code.len() > "Hello World!".len());
+        }
+
+        #[test]
+        #[cfg(not(target_arch = "aarch64"))]
+        fn test_hello_world_generation_skipped() {
+            // Skip this test on non-ARM64 architectures because
+            // the function address calculation is architecture-specific
+            println!("Skipping hello_world generation test on non-ARM64 architecture");
+        }
     }
 
-    #[test]
-    fn test_factorial() {
-        let code = generate_factorial();
-        let factorial_fn: extern "C" fn(i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
+    // Tests that execute the generated code - only run on ARM64
+    #[cfg(all(test, target_arch = "aarch64"))]
+    #[allow(unused_unsafe)]
+    mod execution {
+        use std::mem;
 
-        assert_eq!(unsafe { factorial_fn(0) }, 1);
-        assert_eq!(unsafe { factorial_fn(1) }, 1);
-        assert_eq!(unsafe { factorial_fn(5) }, 120);
-    }
+        use super::*;
 
-    #[test]
-    fn test_array_sum() {
-        let code = generate_array_sum();
-        let sum_fn: extern "C" fn(*const i32, usize) -> i32 =
-            unsafe { mem::transmute(code.as_ptr()) };
+        #[test]
+        fn test_add_function_execution() {
+            let code = generate_add_function();
+            let add_fn: extern "C" fn(i32, i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
 
-        let array = [1, 2, 3, 4, 5];
-        assert_eq!(unsafe { sum_fn(array.as_ptr(), array.len()) }, 15);
+            assert_eq!(unsafe { add_fn(5, 3) }, 8);
+            assert_eq!(unsafe { add_fn(-10, 20) }, 10);
+        }
 
-        let empty: [i32; 0] = [];
-        assert_eq!(unsafe { sum_fn(empty.as_ptr(), 0) }, 0);
-    }
+        #[test]
+        fn test_factorial_execution() {
+            let code = generate_factorial();
+            let factorial_fn: extern "C" fn(i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
 
-    #[test]
-    fn test_multiply_by_constant() {
-        // Test power of two (uses shift)
-        let code = generate_multiply_by_constant(8);
-        let mul_fn: extern "C" fn(i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
-        assert_eq!(unsafe { mul_fn(5) }, 40);
+            assert_eq!(unsafe { factorial_fn(0) }, 1);
+            assert_eq!(unsafe { factorial_fn(1) }, 1);
+            assert_eq!(unsafe { factorial_fn(5) }, 120);
+        }
 
-        // Test non-power of two (uses imul)
-        let code = generate_multiply_by_constant(7);
-        let mul_fn: extern "C" fn(i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
-        assert_eq!(unsafe { mul_fn(6) }, 42);
+        #[test]
+        fn test_array_sum_execution() {
+            let code = generate_array_sum();
+            let sum_fn: extern "C" fn(*const i32, usize) -> i32 =
+                unsafe { mem::transmute(code.as_ptr()) };
+
+            let array = [1, 2, 3, 4, 5];
+            assert_eq!(unsafe { sum_fn(array.as_ptr(), array.len()) }, 15);
+
+            let empty: [i32; 0] = [];
+            assert_eq!(unsafe { sum_fn(empty.as_ptr(), 0) }, 0);
+        }
+
+        #[test]
+        fn test_multiply_by_constant_execution() {
+            // Test power of two (uses shift)
+            let code = generate_multiply_by_constant(8);
+            let mul_fn: extern "C" fn(i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
+            assert_eq!(unsafe { mul_fn(5) }, 40);
+
+            // Test non-power of two (uses mul)
+            let code = generate_multiply_by_constant(7);
+            let mul_fn: extern "C" fn(i32) -> i32 = unsafe { mem::transmute(code.as_ptr()) };
+            assert_eq!(unsafe { mul_fn(6) }, 42);
+        }
     }
 }
