@@ -1,0 +1,10 @@
+[package]
+name = "dynasm-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dynasmrt = "4.0.1"
+
+[build-dependencies]
+dynasm = "4.0.1"

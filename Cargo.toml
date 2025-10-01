@@ -29,7 +29,8 @@ members = [
   "cranelift",
   "rust_sitter",
   "combine",
-  "winnow"
+  "winnow",
+  "dynasm"
 ]
 
 [workspace.lints.rust]
