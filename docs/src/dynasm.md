@@ -149,27 +149,3 @@ fn compile_expr(expr: &Expr, ops: &mut dynasmrt::aarch64::Assembler) {
 ```
 
 This recursive compilation strategy works well for tree-structured intermediate representations.
-
-## Performance Considerations
-
-dynasm-rs generates code with minimal overhead:
-
-1. **No interpretation overhead**: Generated code runs at native speed
-2. **Efficient memory layout**: Code is placed contiguously in memory
-3. **Smart relocation**: Labels are resolved efficiently during finalization
-4. **Allocation reuse**: Assembler buffers can be reused across compilations
-
-The primary cost is the initial code generation, making dynasm-rs ideal for code that will be executed many times.
-
-## Best Practices
-
-When using dynasm-rs effectively:
-
-1. **Profile before optimizing**: Ensure dynamic generation provides real benefits
-2. **Cache generated code**: Don't regenerate identical functions repeatedly
-3. **Handle memory limits**: Executable memory is a finite resource
-4. **Test thoroughly**: Use both unit tests and integration tests
-5. **Document calling conventions**: Make ABI requirements explicit
-6. **Consider alternatives**: Sometimes LLVM or Cranelift might be more appropriate
-
-The library provides maximum flexibility, but with that comes responsibility for correctness and safety.
