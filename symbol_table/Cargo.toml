@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-symbol_table = { version = "0.4", features = ["global"] }
+symbol_table = { version = "0.5", features = ["global"] }
 
 [lints]
 workspace = true
