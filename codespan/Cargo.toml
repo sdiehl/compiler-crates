@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-codespan = "0.12"
+codespan = "0.13"
 
 [lints]
 workspace = true
