@@ -45,7 +45,7 @@ let result = add 5 "hello""#,
 
     let writer = StandardStream::stderr(ColorChoice::Always);
     let config = Config::default();
-    term::emit(&mut writer.lock(), &config, &files, &diagnostic).unwrap();
+    term::emit_to_write_style(&mut writer.lock(), &config, &files, &diagnostic).unwrap();
 }
 
 fn demonstrate_type_errors() {
@@ -133,11 +133,11 @@ fn main() {
         3..18,
         Some("consider removing this function or adding `#[allow(dead_code)]`".to_string()),
     );
-    term::emit(&mut writer.lock(), &config, &files, &warning).unwrap();
+    term::emit_to_write_style(&mut writer.lock(), &config, &files, &warning).unwrap();
 
     // Info
     let info = create_info(file_id, "variable shadowing detected", 96..106);
-    term::emit(&mut writer.lock(), &config, &files, &info).unwrap();
+    term::emit_to_write_style(&mut writer.lock(), &config, &files, &info).unwrap();
 }
 
 fn demonstrate_complex_diagnostic() {
@@ -167,5 +167,5 @@ impl Display for Person {
 
     let writer = StandardStream::stderr(ColorChoice::Always);
     let config = Config::default();
-    term::emit(&mut writer.lock(), &config, &files, &diagnostic).unwrap();
+    term::emit_to_write_style(&mut writer.lock(), &config, &files, &diagnostic).unwrap();
 }
