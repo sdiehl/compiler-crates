@@ -1,3 +1,5 @@
+#![allow(clippy::unwrap_in_result)]
+
 pub mod ast;
 pub mod token;
 
