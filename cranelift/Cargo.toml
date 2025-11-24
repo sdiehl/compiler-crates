@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-cranelift = "0.125.3"
+cranelift = "0.126.0"
 cranelift-module = "0.125.3"
 cranelift-jit = "0.125.3"
 cranelift-native = "0.125.3"
