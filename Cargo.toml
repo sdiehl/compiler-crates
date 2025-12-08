@@ -93,5 +93,5 @@ todo = "warn"
 [workspace.dependencies]
 thiserror = "2.0"
 termcolor = "1.4"
-logos = "0.15"
+logos = "0.16"
 nom = "8.0"

@@ -62,7 +62,7 @@ pub enum Token {
 
     // Skip whitespace
     #[regex(r"[ \t\n\f]+", logos::skip)]
-    #[regex(r"//[^\n]*", logos::skip)]
+    #[regex(r"//[^\n]*", logos::skip, allow_greedy = true)]
     Error,
 }
 

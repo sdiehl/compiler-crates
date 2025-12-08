@@ -61,7 +61,7 @@ pub enum Token {
     Char,
 
     // Comments
-    #[regex(r"//[^\n]*", logos::skip)]
+    #[regex(r"//[^\n]*", logos::skip, allow_greedy = true)]
     #[regex(r"/\*([^*]|\*[^/])*\*/", logos::skip)]
     Comment,
 
@@ -335,7 +335,7 @@ pub enum IndentedToken {
     #[token(":")]
     Colon,
 
-    #[regex(r"#[^\n]*", logos::skip)]
+    #[regex(r"#[^\n]*", logos::skip, allow_greedy = true)]
     Comment,
 }
 
