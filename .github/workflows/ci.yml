@@ -41,7 +41,7 @@ jobs:
         run: |
           wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
           echo "deb http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs)-18 main" | sudo tee /etc/apt/sources.list.d/llvm-18.list
-          echo "deb http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs)-20 main" | sudo tee /etc/apt/sources.list.d/llvm-20.list
+          echo "deb http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs)-21 main" | sudo tee /etc/apt/sources.list.d/llvm-21.list
           sudo apt-get update
 
       - name: Install LLVM 18 for inkwell
@@ -51,13 +51,13 @@ jobs:
             clang-18 libclang-18-dev \
             libpolly-18-dev
 
-      - name: Install LLVM 20 and MLIR for melior
+      - name: Install LLVM 21 and MLIR for melior
         run: |
           sudo apt-get install -y \
-            llvm-20 llvm-20-dev llvm-20-runtime \
-            clang-20 libclang-20-dev \
-            libmlir-20-dev mlir-20-tools \
-            libpolly-20-dev
+            llvm-21 llvm-21-dev llvm-21-runtime \
+            clang-21 libclang-21-dev \
+            libmlir-21-dev mlir-21-tools \
+            libpolly-21-dev
 
       - name: Install additional dependencies
         run: |
@@ -66,9 +66,9 @@ jobs:
       - name: Set LLVM environment variables
         run: |
           echo "LLVM_SYS_181_PREFIX=/usr/lib/llvm-18" >> $GITHUB_ENV
-          echo "LLVM_SYS_200_PREFIX=/usr/lib/llvm-20" >> $GITHUB_ENV
-          echo "MLIR_SYS_200_PREFIX=/usr/lib/llvm-20" >> $GITHUB_ENV
-          echo "TABLEGEN_200_PREFIX=/usr/lib/llvm-20" >> $GITHUB_ENV
+          echo "LLVM_SYS_210_PREFIX=/usr/lib/llvm-21" >> $GITHUB_ENV
+          echo "MLIR_SYS_210_PREFIX=/usr/lib/llvm-21" >> $GITHUB_ENV
+          echo "TABLEGEN_210_PREFIX=/usr/lib/llvm-21" >> $GITHUB_ENV
 
       - name: Setup stable Rust toolchain
         uses: dtolnay/rust-toolchain@stable
