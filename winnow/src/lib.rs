@@ -391,7 +391,7 @@ mod tests {
     #[test]
     fn test_arithmetic() {
         assert_eq!(parse_expression("42").unwrap(), Expr::Number(42.0));
-        assert_eq!(parse_expression("3.14").unwrap(), Expr::Number(3.14));
+        assert_eq!(parse_expression("3.15").unwrap(), Expr::Number(3.15));
 
         let expr = parse_expression("1 + 2").unwrap();
         assert_eq!(expr.eval(), 3.0);
@@ -412,7 +412,7 @@ mod tests {
         assert_eq!(parse_json("true").unwrap(), Json::Bool(true));
         assert_eq!(parse_json("false").unwrap(), Json::Bool(false));
         assert_eq!(parse_json("42").unwrap(), Json::Number(42.0));
-        assert_eq!(parse_json("3.14").unwrap(), Json::Number(3.14));
+        assert_eq!(parse_json("3.15").unwrap(), Json::Number(3.15));
         assert_eq!(
             parse_json("\"hello\"").unwrap(),
             Json::String("hello".to_string())

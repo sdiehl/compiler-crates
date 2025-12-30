@@ -477,8 +477,8 @@ mod tests {
                     base: Base::Decimal,
                     empty_exponent: false,
                 },
-                "3.14",
-                ParsedLiteral::Float(3.14),
+                "3.15",
+                ParsedLiteral::Float(3.15),
             ),
             (
                 LiteralKind::Char { terminated: true },

@@ -262,7 +262,7 @@ mod tests {
         .unwrap();
 
         interpreter.execute(&program).unwrap();
-        assert_eq!(*interpreter.variables.get("z").unwrap(), 30.0);
+        assert_eq!(interpreter.variables["z"], 30.0);
     }
 
     #[test]
@@ -288,8 +288,8 @@ mod tests {
 
         let mut interpreter = Interpreter::new();
         interpreter.execute(&program).unwrap();
-        assert_eq!(*interpreter.variables.get("x").unwrap(), 20.0);
-        assert_eq!(*interpreter.variables.get("y").unwrap(), 4.0);
+        assert_eq!(interpreter.variables["x"], 20.0);
+        assert_eq!(interpreter.variables["y"], 4.0);
     }
 
     #[test]

@@ -412,13 +412,13 @@ mod tests {
 
     #[test]
     fn test_numeric_literals() {
-        let input = "42 -17 3.14 -2.718";
+        let input = "42 -17 3.15 -2.72";
         let tokens = tokenize(input);
 
         assert_eq!(tokens[0].0, Token::Integer(Some(42)));
         assert_eq!(tokens[1].0, Token::Integer(Some(-17)));
-        assert_eq!(tokens[2].0, Token::Float(Some(3.14)));
-        assert_eq!(tokens[3].0, Token::Float(Some(-2.718)));
+        assert_eq!(tokens[2].0, Token::Float(Some(3.15)));
+        assert_eq!(tokens[3].0, Token::Float(Some(-2.72)));
     }
 
     #[test]
