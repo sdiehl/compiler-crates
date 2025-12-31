@@ -1,3 +1,7 @@
+// Fields in diagnostic structs are read by miette derive macros but not
+// directly in Rust code
+#![allow(unused_assignments)]
+
 use std::fmt;
 
 use miette::{Diagnostic, LabeledSpan, NamedSource, SourceSpan};
