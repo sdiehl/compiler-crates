@@ -1,3 +1,5 @@
+#![allow(unused_assignments)]
+
 use std::fmt;
 
 use miette::{Diagnostic, LabeledSpan, NamedSource, SourceSpan};
