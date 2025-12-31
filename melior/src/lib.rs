@@ -203,8 +203,8 @@ pub fn apply_mem2reg(context: &Context, module: &mut Module<'_>) -> Result<(), E
 }
 
 /// Convert parallel loops to GPU kernels
-/// Note: The gpu::create_gpu_kernel_outlining() function is not available in melior 0.26
-/// This function is commented out until the API is available
+/// Note: The gpu::create_gpu_kernel_outlining() function is not available in
+/// melior 0.26 This function is commented out until the API is available
 // pub fn convert_to_gpu(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
 //     let pass_manager = PassManager::new(context);
 //     pass_manager.add_pass(gpu::create_gpu_kernel_outlining());
