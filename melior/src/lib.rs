@@ -3,7 +3,7 @@ use melior::ir::attribute::{IntegerAttribute, StringAttribute, TypeAttribute};
 use melior::ir::operation::OperationLike;
 use melior::ir::r#type::{FunctionType, IntegerType};
 use melior::ir::*;
-use melior::pass::{gpu, transform, PassManager};
+use melior::pass::{transform, PassManager};
 use melior::utility::{register_all_dialects, register_all_llvm_translations, register_all_passes};
 use melior::{Context, Error};
 
@@ -203,11 +203,13 @@ pub fn apply_mem2reg(context: &Context, module: &mut Module<'_>) -> Result<(), E
 }
 
 /// Convert parallel loops to GPU kernels
-pub fn convert_to_gpu(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
-    let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(gpu::create_gpu_kernel_outlining());
-    pass_manager.run(module)
-}
+/// Note: The gpu::create_gpu_kernel_outlining() function is not available in melior 0.26
+/// This function is commented out until the API is available
+// pub fn convert_to_gpu(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
+//     let pass_manager = PassManager::new(context);
+//     pass_manager.add_pass(gpu::create_gpu_kernel_outlining());
+//     pass_manager.run(module)
+// }
 
 /// Strip debug information from the module
 pub fn strip_debug_info(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
