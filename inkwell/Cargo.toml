@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-inkwell = { version = "0.7", features = ["llvm18-1"] }
+inkwell = { version = "0.8", features = ["llvm18-1"] }
