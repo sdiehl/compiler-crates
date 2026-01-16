@@ -28,6 +28,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          df -h
+
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@nightly
         with:
@@ -62,6 +71,12 @@ jobs:
       - name: Install additional dependencies
         run: |
           sudo apt-get install -y zlib1g-dev libzstd-dev
+
+      - name: Clean up apt cache
+        run: |
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+          df -h
 
       - name: Set LLVM environment variables
         run: |
