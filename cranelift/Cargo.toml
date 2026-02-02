@@ -7,7 +7,7 @@ edition = "2021"
 cranelift = "0.127.0"
 cranelift-module = "0.127.0"
 cranelift-jit = "0.127.0"
-cranelift-native = "0.127.0"
+cranelift-native = "0.128.1"
 target-lexicon = "0.13"
 
 [lints.rust]
