@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 cranelift = "0.128.1"
 cranelift-module = "0.128.1"
-cranelift-jit = "0.128.1"
+cranelift-jit = "0.131.1"
 cranelift-native = "0.128.1"
 target-lexicon = "0.13"
 
