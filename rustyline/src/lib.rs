@@ -237,7 +237,9 @@ impl Validator for CompilerValidator {
                     return Ok(ValidationResult::Invalid(Some("Mismatched braces".into())));
                 }
                 ']' if stack.pop() != Some('[') => {
-                    return Ok(ValidationResult::Invalid(Some("Mismatched brackets".into())));
+                    return Ok(ValidationResult::Invalid(Some(
+                        "Mismatched brackets".into(),
+                    )));
                 }
                 _ => {}
             }
