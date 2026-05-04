@@ -4,12 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-lalrpop-util = { version = "0.22", features = ["lexer"] }
+lalrpop-util = { version = "0.23", features = ["lexer"] }
 logos = { workspace = true }
 regex = "1"
 
 [build-dependencies]
-lalrpop = "0.22"
+lalrpop = "0.23"
 
 [lints]
 workspace = true

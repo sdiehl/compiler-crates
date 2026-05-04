@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-dynasmrt = "4.0.1"
+dynasmrt = "5.0.0"
 
 [build-dependencies]
-dynasm = "4.0.1"
+dynasm = "5.0.0"
