@@ -228,24 +228,16 @@ impl Validator for CompilerValidator {
         for ch in input.chars() {
             match ch {
                 '(' | '{' | '[' => stack.push(ch),
-                ')' => {
-                    if stack.pop() != Some('(') {
-                        return Ok(ValidationResult::Invalid(Some(
-                            "Mismatched parentheses".into(),
-                        )));
-                    }
+                ')' if stack.pop() != Some('(') => {
+                    return Ok(ValidationResult::Invalid(Some(
+                        "Mismatched parentheses".into(),
+                    )));
                 }
-                '}' => {
-                    if stack.pop() != Some('{') {
-                        return Ok(ValidationResult::Invalid(Some("Mismatched braces".into())));
-                    }
+                '}' if stack.pop() != Some('{') => {
+                    return Ok(ValidationResult::Invalid(Some("Mismatched braces".into())));
                 }
-                ']' => {
-                    if stack.pop() != Some('[') {
-                        return Ok(ValidationResult::Invalid(Some(
-                            "Mismatched brackets".into(),
-                        )));
-                    }
+                ']' if stack.pop() != Some('[') => {
+                    return Ok(ValidationResult::Invalid(Some("Mismatched brackets".into())));
                 }
                 _ => {}
             }
