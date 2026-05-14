@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-chumsky = "0.12"
+chumsky = "0.13"
 ariadne = "0.6"
 
 [lints]
