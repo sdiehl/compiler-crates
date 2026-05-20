@@ -1,12 +1,11 @@
 [package]
-name = "pest-example"
+name = "thiserror-example"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-pest = "2.7"
-pest_derive = "2.7"
 thiserror = { workspace = true }
+thiserror-context = "0.1"
 
 [lints]
 workspace = true

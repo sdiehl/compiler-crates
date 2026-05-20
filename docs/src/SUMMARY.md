@@ -6,22 +6,25 @@
 
 # Parsing & Lexing
 
-* [Comparison](./parsing-comparison.md)
-- [chumsky](./chumsky.md)
-- [combine](./combine.md)
-- [lalrpop](./lalrpop.md)
-- [logos](./logos.md)
-- [nom](./nom.md)
-- [peg](./peg.md)
-- [pest](./pest.md)
-- [rowan](./rowan.md)
-- [rust_sitter](./rust_sitter.md)
-- [rustc_lexer](./rustc_lexer.md)
-- [winnow](./winnow.md)
+- [Comparison](./parsing-comparison.md)
+
+* [chumsky](./chumsky.md)
+* [combine](./combine.md)
+* [lalrpop](./lalrpop.md)
+* [logos](./logos.md)
+* [nom](./nom.md)
+* [peg](./peg.md)
+* [pest](./pest.md)
+* [rowan](./rowan.md)
+* [rust_sitter](./rust_sitter.md)
+* [rustc_lexer](./rustc_lexer.md)
+* [winnow](./winnow.md)
 
 # Parser Utilities
 
+- [marginalia](./marginalia.md)
 - [nom_locate](./nom_locate.md)
+- [offsides](./offsides.md)
 - [quote](./quote.md)
 - [syn](./syn.md)
 
@@ -30,6 +33,10 @@
 - [ariadne](./ariadne.md)
 - [codespan-reporting](./codespan-reporting.md)
 - [miette](./miette.md)
+
+# Error Handling
+
+- [thiserror](./thiserror.md)
 
 # Data Structures
 

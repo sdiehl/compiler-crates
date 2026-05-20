@@ -24,7 +24,7 @@ The TokenKind enum covers all possible Rust tokens, from simple punctuation to c
 
 This function provides human-readable descriptions for each token kind, useful for error messages and debugging.
 
-## Literal Processing  
+## Literal Processing
 
 Raw tokens need to be "cooked" to extract their actual values. The lexer identifies literal kinds but doesn't parse their contents, leaving that to a separate validation step.
 

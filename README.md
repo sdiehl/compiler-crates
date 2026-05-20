@@ -8,8 +8,8 @@
 
 A collection of minimal Rust examples focused on compiler development.
 
-* [**Read Online**](https://sdiehl.github.io/compiler-crates/)
-* [Source Code](https://github.com/sdiehl/compiler-crates)
+- [**Read Online**](https://sdiehl.github.io/compiler-crates/)
+- [Source Code](https://github.com/sdiehl/compiler-crates)
 
 ### Parsing & Lexing
 
@@ -74,4 +74,4 @@ just serve-docs  # Serve documentation locally
 
 ## License
 
-MIT Licensed. Copyright 2025 Stephen Diehl.
+MIT Licensed. Copyright 2025-2026 Stephen Diehl.

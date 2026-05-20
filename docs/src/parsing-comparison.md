@@ -12,12 +12,12 @@ This page provides a comprehensive comparison of actual parser generators and pa
 
 | Parser      | Type              | Algorithm         | Grammar Format            | Performance | Error Recovery | Learning Curve | Production Ready | Best For                                    |
 | ----------- | ----------------- | ----------------- | ------------------------- | ----------- | -------------- | -------------- | ---------------- | ------------------------------------------- |
-| **nom**     | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐⭐⭐       | ⭐⭐             | ⭐⭐⭐⭐           | ⭐⭐⭐⭐⭐            | Binary formats, streaming protocols         |
-| **pest**    | Parser Generator  | PEG               | External `.pest` files    | ⭐⭐⭐         | ⭐⭐⭐⭐           | ⭐⭐             | ⭐⭐⭐⭐             | Prototyping, DSLs, configuration languages  |
-| **lalrpop** | Parser Generator  | LALR(1)           | External `.lalrpop` files | ⭐⭐⭐⭐⭐       | ⭐⭐⭐            | ⭐⭐⭐⭐           | ⭐⭐⭐⭐⭐            | Production compilers, programming languages |
-| **chumsky** | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐         | ⭐⭐⭐⭐⭐          | ⭐⭐             | ⭐⭐⭐              | Error recovery, IDE support                 |
-| **winnow**  | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐⭐⭐       | ⭐⭐             | ⭐⭐⭐            | ⭐⭐⭐⭐             | Successor to nom, cleaner API               |
-| **pom**     | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐⭐        | ⭐⭐             | ⭐⭐⭐            | ⭐⭐⭐              | Simple parsers, educational                 |
+| **nom**     | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐⭐⭐  | ⭐⭐           | ⭐⭐⭐⭐       | ⭐⭐⭐⭐⭐       | Binary formats, streaming protocols         |
+| **pest**    | Parser Generator  | PEG               | External `.pest` files    | ⭐⭐⭐      | ⭐⭐⭐⭐       | ⭐⭐           | ⭐⭐⭐⭐         | Prototyping, DSLs, configuration languages  |
+| **lalrpop** | Parser Generator  | LALR(1)           | External `.lalrpop` files | ⭐⭐⭐⭐⭐  | ⭐⭐⭐         | ⭐⭐⭐⭐       | ⭐⭐⭐⭐⭐       | Production compilers, programming languages |
+| **chumsky** | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐      | ⭐⭐⭐⭐⭐     | ⭐⭐           | ⭐⭐⭐           | Error recovery, IDE support                 |
+| **winnow**  | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐⭐⭐  | ⭐⭐           | ⭐⭐⭐         | ⭐⭐⭐⭐         | Successor to nom, cleaner API               |
+| **pom**     | Parser Combinator | Recursive Descent | Rust combinators          | ⭐⭐⭐⭐    | ⭐⭐           | ⭐⭐⭐         | ⭐⭐⭐           | Simple parsers, educational                 |
 
 ## Parsing Algorithm Characteristics
 
@@ -29,33 +29,33 @@ This page provides a comprehensive comparison of actual parser generators and pa
 
 ## Detailed Feature Comparison
 
-| Feature                    | nom     | pest    | lalrpop      | chumsky | winnow  | pom     |
-| -------------------------- | ------- | ------- | ------------ | ------- | ------- | ------- |
-| **Grammar Definition**     |         |         |              |         |         |         |
-| External grammar files     | 🔴      | 🟢      | 🟢           | 🔴      | 🔴      | 🔴      |
-| Inline in Rust code        | 🟢      | 🔴      | 🔴           | 🟢      | 🟢      | 🟢      |
-| Type-safe                  | 🟢      | 🟡      | 🟢           | 🟢      | 🟢      | 🟢      |
-| Grammar validation         | Runtime | Runtime | Compile-time | Runtime | Runtime | Runtime |
-| **Parsing Features**       |         |         |              |         |         |         |
-| Streaming input            | 🟢      | 🔴      | 🔴           | 🟡      | 🟢      | 🔴      |
-| Zero-copy parsing          | 🟢      | 🟢      | 🟢           | 🟡      | 🟢      | 🟢      |
-| Incremental parsing        | 🔴      | 🔴      | 🔴           | 🔴      | 🔴      | 🔴      |
-| Memoization/Packrat        | 🔴      | 🟢      | 🔴           | 🟡      | 🔴      | 🟡      |
-| Custom lexer support       | 🟢      | N/A     | 🟢           | 🟢      | 🟢      | 🟢      |
-| **Error Handling**         |         |         |              |         |         |         |
-| Error recovery             | 🔴      | 🟢      | 🟡           | 🟢      | 🔴      | 🔴      |
-| Custom error types         | 🟢      | 🟢      | 🟢           | 🟢      | 🟢      | 🟢      |
-| Error position tracking    | 🟢      | 🟢      | 🟢           | 🟢      | 🟢      | 🟢      |
-| Multiple errors            | 🔴      | 🟢      | 🔴           | 🟢      | 🔴      | 🔴      |
-| Contextual errors          | 🟢      | 🟢      | 🟡           | 🟢      | 🟢      | 🟡      |
-| **AST Generation**         |         |         |              |         |         |         |
-| Automatic AST generation   | 🔴      | 🟡      | 🟢           | 🔴      | 🔴      | 🔴      |
-| Custom AST types           | 🟢      | 🟢      | 🟢           | 🟢      | 🟢      | 🟢      |
-| Location spans             | 🟢      | 🟢      | 🟢           | 🟢      | 🟢      | 🟢      |
-| **Development Experience** |         |         |              |         |         |         |
-| IDE support                | 🟡      | 🟡      | 🟡           | 🟡      | 🟡      | 🟡      |
-| Debugging tools            | 🟡      | 🟢      | 🟢           | 🟢      | 🟡      | 🟡      |
-| Documentation quality      | ⭐⭐⭐⭐    | ⭐⭐⭐⭐    | ⭐⭐⭐          | ⭐⭐⭐⭐    | ⭐⭐⭐⭐    | ⭐⭐⭐     |
+| Feature                    | nom      | pest     | lalrpop      | chumsky  | winnow   | pom     |
+| -------------------------- | -------- | -------- | ------------ | -------- | -------- | ------- |
+| **Grammar Definition**     |          |          |              |          |          |         |
+| External grammar files     | 🔴       | 🟢       | 🟢           | 🔴       | 🔴       | 🔴      |
+| Inline in Rust code        | 🟢       | 🔴       | 🔴           | 🟢       | 🟢       | 🟢      |
+| Type-safe                  | 🟢       | 🟡       | 🟢           | 🟢       | 🟢       | 🟢      |
+| Grammar validation         | Runtime  | Runtime  | Compile-time | Runtime  | Runtime  | Runtime |
+| **Parsing Features**       |          |          |              |          |          |         |
+| Streaming input            | 🟢       | 🔴       | 🔴           | 🟡       | 🟢       | 🔴      |
+| Zero-copy parsing          | 🟢       | 🟢       | 🟢           | 🟡       | 🟢       | 🟢      |
+| Incremental parsing        | 🔴       | 🔴       | 🔴           | 🔴       | 🔴       | 🔴      |
+| Memoization/Packrat        | 🔴       | 🟢       | 🔴           | 🟡       | 🔴       | 🟡      |
+| Custom lexer support       | 🟢       | N/A      | 🟢           | 🟢       | 🟢       | 🟢      |
+| **Error Handling**         |          |          |              |          |          |         |
+| Error recovery             | 🔴       | 🟢       | 🟡           | 🟢       | 🔴       | 🔴      |
+| Custom error types         | 🟢       | 🟢       | 🟢           | 🟢       | 🟢       | 🟢      |
+| Error position tracking    | 🟢       | 🟢       | 🟢           | 🟢       | 🟢       | 🟢      |
+| Multiple errors            | 🔴       | 🟢       | 🔴           | 🟢       | 🔴       | 🔴      |
+| Contextual errors          | 🟢       | 🟢       | 🟡           | 🟢       | 🟢       | 🟡      |
+| **AST Generation**         |          |          |              |          |          |         |
+| Automatic AST generation   | 🔴       | 🟡       | 🟢           | 🔴       | 🔴       | 🔴      |
+| Custom AST types           | 🟢       | 🟢       | 🟢           | 🟢       | 🟢       | 🟢      |
+| Location spans             | 🟢       | 🟢       | 🟢           | 🟢       | 🟢       | 🟢      |
+| **Development Experience** |          |          |              |          |          |         |
+| IDE support                | 🟡       | 🟡       | 🟡           | 🟡       | 🟡       | 🟡      |
+| Debugging tools            | 🟡       | 🟢       | 🟢           | 🟢       | 🟡       | 🟡      |
+| Documentation quality      | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐       | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐  |
 
 ## Grammar Complexity Support
 
@@ -76,36 +76,42 @@ This page provides a comprehensive comparison of actual parser generators and pa
 ## tl;dr Recommendations
 
 ### Choose **nom** when:
+
 - Parsing binary formats or network protocols
 - Need streaming/incremental parsing
 - Performance is critical
 - Want fine-grained control over parsing
 
 ### Choose **pest** when:
+
 - Rapid prototyping of new languages
 - Grammar readability is important
 - Need good error messages out of the box
 - Working with configuration languages or DSLs
 
 ### Choose **lalrpop** when:
+
 - Building production programming language compilers
 - Grammar has left recursion
 - Need maximum parsing performance
 - Want compile-time grammar validation
 
 ### Choose **chumsky** when:
+
 - Error recovery is critical (IDE/LSP scenarios)
 - Need excellent error messages
 - Building development tools
 - Want modern combinator API
 
 ### Choose **winnow** when:
+
 - Starting a new project (nom successor)
 - Want cleaner API than nom
 - Need streaming support
 - Performance is important
 
 ### Choose **pom** when:
+
 - Learning parser combinators
 - Building simple parsers
 - Want minimal dependencies

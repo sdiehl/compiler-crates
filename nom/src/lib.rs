@@ -75,7 +75,8 @@ pub fn identifier(input: &str) -> IResult<&str, String> {
 /// Parse whitespace - wraps a parser with optional whitespace
 fn ws<'a, O, F>(mut inner: F) -> impl FnMut(&'a str) -> IResult<&'a str, O>
 where
-    F: FnMut(&'a str) -> IResult<&'a str, O>, {
+    F: FnMut(&'a str) -> IResult<&'a str, O>,
+{
     move |input| {
         let (input, _) = multispace0.parse(input)?;
         let (input, result) = inner(input)?;

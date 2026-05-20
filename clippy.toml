@@ -1,8 +1,6 @@
-disallowed-types = [
-]
+disallowed-types = []
 
-disallowed-macros = [
-]
+disallowed-macros = []
 
 # Complexity
 cognitive-complexity-threshold = 20

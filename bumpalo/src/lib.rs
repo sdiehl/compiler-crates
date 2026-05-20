@@ -163,7 +163,8 @@ pub fn scoped_allocation() -> i32 {
 /// Shows using bump allocation with closures
 pub fn with_allocator<F, R>(f: F) -> R
 where
-    F: FnOnce(&Bump) -> R, {
+    F: FnOnce(&Bump) -> R,
+{
     let bump = Bump::new();
     f(&bump)
 }

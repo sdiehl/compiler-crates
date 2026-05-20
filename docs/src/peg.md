@@ -120,32 +120,6 @@ The grammar correctly handles operator precedence through its structure:
 
 Higher-precedence operators are parsed in deeper rules, ensuring correct parse trees without ambiguity.
 
-## Advanced Grammar Features
-
-PEG supports several advanced features useful for compiler construction:
-
-**Syntactic Predicates**: Use `&` for positive lookahead and `!` for negative lookahead without consuming input.
-
-**Semantic Actions**: Embed Rust code directly in the grammar to build ASTs or perform validation during parsing.
-
-**Rule Parameters**: Pass parameters to rules for context-sensitive parsing.
-
-**Position Tracking**: Access the current position in the input for error reporting or source mapping.
-
-**Custom Error Types**: Define your own error types for domain-specific error reporting.
-
-## Performance Characteristics
-
-PEG parsers have predictable performance characteristics:
-
-**Linear Time**: PEGs parse in linear time with memoization (packrat parsing) or near-linear without.
-
-**Memory Usage**: Packrat parsing trades memory for guaranteed linear time by memoizing all rule applications.
-
-**No Backtracking**: Despite appearances, well-written PEG grammars minimize backtracking through careful ordering of alternatives.
-
-**Direct Execution**: The generated parser is direct Rust code, avoiding interpretation overhead.
-
 ## Grammar Design Best Practices
 
 Structure your PEG grammar for clarity and performance:

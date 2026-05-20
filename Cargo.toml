@@ -1,35 +1,38 @@
 [workspace]
 resolver = "2"
 members = [
-  "bitflags",
-  "petgraph",
-  "smallvec",
-  "symbol_table",
-  "rustyline",
-  "indexmap",
-  "id-arena",
-  "logos",
-  "rustc_lexer",
-  "codespan-reporting",
   "ariadne",
-  "miette",
-  "rowan",
-  "melior",
-  "inkwell",
+  "bitflags",
   "bumpalo",
-  "lalrpop",
-  "syn",
-  "quote",
   "chumsky",
+  "codespan",
+  "codespan-reporting",
+  "combine",
+  "cranelift",
+  "id-arena",
+  "indexmap",
+  "inkwell",
+  "lalrpop",
+  "logos",
+  "marginalia",
+  "melior",
+  "miette",
   "nom",
   "nom-locate",
+  "offsides",
   "peg",
   "pest",
-  "codespan",
-  "cranelift",
+  "petgraph",
+  "quote",
+  "rowan",
   "rust_sitter",
-  "combine",
-  "winnow"
+  "rustc_lexer",
+  "rustyline",
+  "smallvec",
+  "symbol_table",
+  "syn",
+  "thiserror",
+  "winnow",
 ]
 
 [workspace.lints.rust]
@@ -37,7 +40,6 @@ unsafe_code = "deny"
 dead_code = "warn"
 unused_variables = "warn"
 unused_extern_crates = "allow"
-
 
 [workspace.lints.clippy]
 vec_box = "allow"
@@ -90,7 +92,7 @@ complexity = { level = "warn", priority = -1 }
 todo = "warn"
 
 [workspace.dependencies]
-thiserror = "2.0"
-termcolor = "1.4"
 logos = "0.15"
 nom = "8.0"
+termcolor = "1.4"
+thiserror = "2.0"
