@@ -68,13 +68,11 @@
 
 - [Write You a Haskell](http://dev.stephendiehl.com/fun/) - My old tutorial on functional language implementation including parser, type inference, pattern matching, typeclasses, STG intermediate language, and native code generation.
 
+- [Typechecker Zoo](https://github.com/sdiehl/typechecker-zoo) - My collection of self-contained type checker implementations in Rust covering Algorithm W, System F, System F-ω, Calculus of Constructions, type classes, refinement types, row polymorphism, row effects, and call-by-push-value.
+
 - [Compiler Construction](https://people.inf.ethz.ch/wirth/CompilerConstruction/) - Niklaus Wirth's concise, practical guide. Step-by-step approach through each compiler design stage focusing on practical implementation.
 
 ## Parsing Tools and Techniques
-
-- [The Definitive ANTLR 4 Reference](https://pragprog.com/titles/tpantlr2/the-definitive-antlr-4-reference/) - Terence Parr's essential guide to ANTLR parser generator with LL(*) parsing technology. Covers grammar construction, tree construction, and StringTemplate code generation.
-
-- [ANTLR Mega Tutorial](https://tomassetti.me/antlr-mega-tutorial/) - Federico Tomassetti's comprehensive tutorial covering ANTLR setup for multiple languages (JavaScript, Python, Java, C#), testing approaches, and advanced features.
 
 - [LR Parsing Theory and Practice](https://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html) - Excellent blog post demystifying the differences between LL and LR parsing with practical examples.
 
@@ -124,11 +122,7 @@
 
 - [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) - Parser generator creating incremental parsers suitable for editor integration. Good example of modern parsing technology beyond traditional compiler construction.
 
-- [ANTLR](https://www.antlr.org/) - Popular parser generator supporting multiple target languages. Extensive documentation and community resources.
-
 - [Compiler Explorer](https://godbolt.org/) - Online tool for exploring compiler output across different compilers and optimization levels. Invaluable for understanding code generation.
-
-- [ANTLRWorks](https://www.antlr3.org/works/) - GUI development environment for ANTLR grammars with visualization and debugging features.
 
 ## Community and Support
 
