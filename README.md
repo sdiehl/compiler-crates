@@ -27,7 +27,9 @@ A collection of minimal Rust examples focused on compiler development.
 
 ### Parser Utilities
 
+- [**marginalia**](./marginalia/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/marginalia.html) - Trivia-preserving lexer adapter for comment-aware tooling
 - [**nom_locate**](./nom_locate/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/nom_locate.html) - Location tracking for nom parsers
+- [**offsides**](./offsides/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/offsides.html) - Layout-sensitive lexer adapter inserting virtual braces and separators
 - [**quote**](./quote/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/quote.html) - Quasi-quoting for Rust code generation
 - [**syn**](./syn/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/syn.html) - Rust syntax tree parsing and manipulation for procedural macros
 
@@ -61,6 +63,10 @@ A collection of minimal Rust examples focused on compiler development.
 
 - [**codespan**](./codespan/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/codespan.html) - Core span tracking and position management for compilers
 - [**rustyline**](./rustyline/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/rustyline.html) - Line editing for REPL implementations
+
+### Error Handling
+
+- [**thiserror**](./thiserror/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/thiserror.html) - Derive-based error types with multi-phase context layering
 
 ### Build Commands
 
