@@ -53,6 +53,7 @@ A collection of minimal Rust examples focused on compiler development.
 ### Code Generation
 
 - [**cranelift**](./cranelift/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/cranelift.html) - Fast JIT code generator for WebAssembly and language runtimes
+- [**dynasm**](./dynasm/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/dynasm.html) - Runtime assembler for ARM64 and x86-64 with compile-time syntax checking
 - [**inkwell**](./inkwell/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/inkwell.html) - Safe LLVM bindings for generating optimized machine code
 - [**melior**](./melior/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/melior.html) - MLIR bindings for multi-level IR compilation
 

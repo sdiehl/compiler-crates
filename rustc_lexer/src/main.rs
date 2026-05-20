@@ -94,7 +94,7 @@ fn demonstrate_trivia() {
     let code = r#"
 // This is a line comment
 fn main() {
-    /* This is a 
+    /* This is a
        block comment */
     println!("Hello"); // Another comment
 }

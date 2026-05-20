@@ -205,7 +205,7 @@ pub fn apply_mem2reg(context: &Context, module: &mut Module<'_>) -> Result<(), E
 /// Convert parallel loops to GPU kernels
 pub fn convert_to_gpu(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(gpu::create_gpu_kernel_outlining());
+    pass_manager.add_pass(gpu::create_gpu_kernel_outlining_pass());
     pass_manager.run(module)
 }
 

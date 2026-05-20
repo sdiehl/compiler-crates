@@ -138,11 +138,11 @@ th {
         padding: 12px;
         font-size: 14px;
     }
-    
+
     .algorithm, .example, .warning {
         padding: 12px;
     }
-    
+
     /* Smaller logos on mobile */
     .type-system-logo {
         width: 192px !important;

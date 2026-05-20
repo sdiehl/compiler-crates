@@ -62,7 +62,7 @@ The print_ast method is part of the Compiler impl:
 pub fn print_ast(&self, id: Id<AstNode>, depth: usize) {
     let indent = "  ".repeat(depth);
     let node = &self.ast_arena[id];
-    
+
     match &node.kind {
         NodeKind::Program => println!("{}Program", indent),
         NodeKind::Function { name, params, body } => {

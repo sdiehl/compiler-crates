@@ -54,6 +54,7 @@
 # Code Generation
 
 - [cranelift](./cranelift.md)
+- [dynasm](./dynasm.md)
 - [inkwell](./inkwell.md)
 - [melior](./melior.md)
 

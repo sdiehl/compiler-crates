@@ -24,8 +24,7 @@ pub enum Expr {
 /// Parse arithmetic expressions with operator precedence
 pub fn expression<Input>() -> impl Parser<Input, Output = Expr>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     spaces().with(expr())
 }
 
@@ -80,8 +79,7 @@ parser! {
 
 fn number<Input>() -> impl Parser<Input, Output = Expr>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     let integer = many1(digit());
     let decimal = optional(char('.').with(many(digit())));
 
@@ -97,8 +95,7 @@ where
 
 fn identifier<Input>() -> impl Parser<Input, Output = String>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     (letter(), many(choice((letter(), digit(), char('_')))))
         .map(|(first, rest): (char, String)| format!("{}{}", first, rest))
 }
@@ -157,8 +154,7 @@ parser! {
 
 fn json_number<Input>() -> impl Parser<Input, Output = JsonValue>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     let sign = optional(char('-'));
     let integer = many1::<String, _, _>(digit());
     let decimal = optional(char('.').with(many1::<String, _, _>(digit())));
@@ -191,8 +187,7 @@ where
 
 fn json_string<Input>() -> impl Parser<Input, Output = JsonValue>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     between(
         char('"'),
         char('"'),
@@ -264,8 +259,7 @@ pub enum SExpr {
 /// S-expression parser
 pub fn s_expression<Input>() -> impl Parser<Input, Output = SExpr>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     spaces().with(s_expr())
 }
 
@@ -292,8 +286,7 @@ parser! {
 
 fn s_symbol<Input>() -> impl Parser<Input, Output = SExpr>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     many1(satisfy(|c: char| {
         c.is_alphanumeric() || "+-*/_<>=!?".contains(c)
     }))
@@ -302,8 +295,7 @@ where
 
 fn s_number<Input>() -> impl Parser<Input, Output = SExpr>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     let sign = optional(char('-'));
     let digits = many1(digit());
 
@@ -319,8 +311,7 @@ where
 
 fn s_string<Input>() -> impl Parser<Input, Output = SExpr>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     between(char('"'), char('"'), many(satisfy(|c: char| c != '"'))).map(SExpr::String)
 }
 
@@ -347,8 +338,7 @@ pub enum ConfigValue {
 /// Parse configuration file
 pub fn config<Input>() -> impl Parser<Input, Output = Config>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     spaces()
         .with(many(config_entry().skip(spaces())))
         .skip(eof())
@@ -357,8 +347,7 @@ where
 
 fn config_entry<Input>() -> impl Parser<Input, Output = ConfigEntry>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     let key = many1(satisfy(|c: char| {
         c.is_alphanumeric() || c == '_' || c == '.'
     }));
@@ -382,15 +371,13 @@ parser! {
 
 fn config_string<Input>() -> impl Parser<Input, Output = ConfigValue>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     between(char('"'), char('"'), many(satisfy(|c: char| c != '"'))).map(ConfigValue::String)
 }
 
 fn config_bool<Input>() -> impl Parser<Input, Output = ConfigValue>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     choice((
         string("true").map(|_| ConfigValue::Bool(true)),
         string("false").map(|_| ConfigValue::Bool(false)),
@@ -399,8 +386,7 @@ where
 
 fn config_number<Input>() -> impl Parser<Input, Output = ConfigValue>
 where
-    Input: Stream<Token = char>,
-{
+    Input: Stream<Token = char>, {
     let sign = optional(char('-'));
     let integer = many1(digit());
     let decimal = optional(char('.').with(many1(digit())));

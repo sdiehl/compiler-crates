@@ -27,7 +27,7 @@ pub enum Tok {
     #[regex(r"[A-Za-z_][A-Za-z0-9_]*", |l| l.slice().to_owned(), priority = 2)]
     Ident(String),
 
-    #[regex(r"//[^\n]*", |l| l.slice().to_owned())]
+    #[regex(r"//[^\n]*", |l| l.slice().to_owned(), allow_greedy = true)]
     LineComment(String),
 
     #[regex(r"/\*([^*]|\*[^/])*\*/", |l| l.slice().to_owned())]

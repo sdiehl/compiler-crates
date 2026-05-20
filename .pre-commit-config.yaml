@@ -1,0 +1,41 @@
+default_install_hook_types: [pre-commit]
+default_stages: [pre-commit]
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.snap$
+      - id: end-of-file-fixer
+        exclude: ^LICENSE$
+      - id: check-toml
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+      - id: mixed-line-ending
+
+  - repo: local
+    hooks:
+      - id: dprint
+        name: dprint fmt
+        entry: dprint fmt
+        language: system
+        files: \.(md|json|toml|yaml|yml)$
+        pass_filenames: false
+
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cargo +nightly-2025-03-03 fmt --all --check
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+      - id: cargo-clippy
+        name: cargo clippy
+        entry: cargo clippy --workspace --all-targets --exclude melior-examples -- -D warnings
+        language: system
+        types: [rust]
+        pass_filenames: false

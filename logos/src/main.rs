@@ -126,7 +126,7 @@ fn benchmark_lexer() {
 fn demonstrate_complex_tokens() {
     let source = r#"
 // Single-line comment
-/* Multi-line 
+/* Multi-line
    comment */
 "string with \"escapes\""
 'c'
@@ -168,12 +168,12 @@ mod ast {
 impl Parser {
     fn parse_expression(&mut self) -> Result<Node, Error> {
         let mut left = self.parse_primary()?;
-        
+
         while let Some(op) = self.match_operator() {
             let right = self.parse_primary()?;
             left = Node::binary(op, left, right);
         }
-        
+
         Ok(left)
     }
 }

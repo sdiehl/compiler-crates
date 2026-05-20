@@ -39,7 +39,7 @@ Intelligent completion improves REPL usability significantly:
 ```rust
 impl Completer for CommandCompleter {
     type Candidate = Pair;
-    
+
     fn complete(
         &self,
         line: &str,
@@ -48,7 +48,7 @@ impl Completer for CommandCompleter {
     ) -> Result<(usize, Vec<Pair>)> {
         let line_before_cursor = &line[..pos];
         let words: Vec<&str> = line_before_cursor.split_whitespace().collect();
-        
+
         if words.is_empty() || (words.len() == 1 && !line_before_cursor.ends_with(' ')) {
             // Complete commands at start of line
             let prefix = words.get(0).unwrap_or(&"");
@@ -60,13 +60,13 @@ impl Completer for CommandCompleter {
                     replacement: cmd.clone(),
                 })
                 .collect();
-            
+
             Ok((0, matches))
         } else {
             // Complete keywords within expressions
             let last_word = words.last().unwrap_or(&"");
             let word_start = line_before_cursor.rfind(last_word).unwrap_or(pos);
-            
+
             let matches: Vec<Pair> = self.keywords
                 .iter()
                 .filter(|kw| kw.starts_with(last_word))
@@ -75,7 +75,7 @@ impl Completer for CommandCompleter {
                     replacement: kw.to_string(),
                 })
                 .collect();
-            
+
             Ok((word_start, matches))
         }
     }
@@ -107,7 +107,7 @@ impl Validator for CompilerValidator {
     fn validate(&self, ctx: &mut ValidationContext) -> Result<ValidationResult> {
         let input = ctx.input();
         let mut stack = Vec::new();
-        
+
         for ch in input.chars() {
             match ch {
                 '(' | '{' | '[' => stack.push(ch),
@@ -129,7 +129,7 @@ impl Validator for CompilerValidator {
                 _ => {}
             }
         }
-        
+
         if stack.is_empty() {
             Ok(ValidationResult::Valid(None))
         } else {

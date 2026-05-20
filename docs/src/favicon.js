@@ -5,7 +5,7 @@
     var title = document.title;
     var description = "Compiler crates";
     var imageUrl = window.location.origin + "/lean.png";
-    
+
     // Create meta tags for social sharing
     var metaTags = [
         // Open Graph meta tags
@@ -14,18 +14,18 @@
         { property: "og:image", content: imageUrl },
         { property: "og:url", content: url },
         { property: "og:type", content: "website" },
-        
+
         // Twitter Card meta tags
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
         { name: "twitter:image", content: imageUrl },
-        
+
         // General meta tags
         { name: "description", content: description },
         { name: "image", content: imageUrl }
     ];
-    
+
     // Add meta tags to the head
     var head = document.getElementsByTagName('head')[0];
     metaTags.forEach(function(tag) {

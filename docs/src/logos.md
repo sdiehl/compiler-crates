@@ -21,14 +21,14 @@ pub enum Token {
     If,
     #[token("else")]
     Else,
-    
+
     // Identifiers and literals
     #[regex("[a-zA-Z_][a-zA-Z0-9_]*", |lex| lex.slice().to_string())]
     Identifier(String),
-    
+
     #[regex(r"-?[0-9]+", |lex| lex.slice().parse::<i64>().ok())]
     Integer(Option<i64>),
-    
+
     // Operators
     #[token("+")]
     Plus,

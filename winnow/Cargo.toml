@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-winnow = "0.7"
+winnow = "1.0"
 
 [lints]
 workspace = true

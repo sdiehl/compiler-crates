@@ -25,7 +25,8 @@ impl DiagnosticEngine {
 
     pub fn emit_diagnostic(&self, diagnostic: Diagnostic<usize>) {
         let writer = StandardStream::stderr(ColorChoice::Always);
-        let _ = term::emit(&mut writer.lock(), &self.config, &self.files, &diagnostic);
+        let _ =
+            term::emit_to_write_style(&mut writer.lock(), &self.config, &self.files, &diagnostic);
     }
 }
 

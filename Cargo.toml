@@ -9,6 +9,7 @@ members = [
   "codespan-reporting",
   "combine",
   "cranelift",
+  "dynasm",
   "id-arena",
   "indexmap",
   "inkwell",
@@ -92,7 +93,7 @@ complexity = { level = "warn", priority = -1 }
 todo = "warn"
 
 [workspace.dependencies]
-logos = "0.15"
+logos = "0.16"
 nom = "8.0"
 termcolor = "1.4"
 thiserror = "2.0"

@@ -422,8 +422,7 @@ pub fn create_recursive_function<'ctx>(
             n,
             rec_result
                 .try_as_basic_value()
-                .left()
-                .unwrap()
+                .unwrap_basic()
                 .into_int_value(),
             "result",
         )

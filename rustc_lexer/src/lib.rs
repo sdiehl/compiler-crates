@@ -400,6 +400,7 @@ pub fn describe_token(kind: TokenKind) -> &'static str {
 }
 
 #[cfg(test)]
+#[allow(clippy::approx_constant)]
 mod tests {
     use super::*;
 

@@ -385,6 +385,7 @@ fn url(input: &mut &str) -> PResult<Url> {
 }
 
 #[cfg(test)]
+#[allow(clippy::approx_constant)]
 mod tests {
     use super::*;
 
