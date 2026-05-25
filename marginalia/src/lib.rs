@@ -3,7 +3,7 @@
 //! clean stream of semantic tokens.
 
 use logos::Logos;
-use marginalia::{Classify, Trivia, TriviaEvent, TriviaLexer, TriviaPiece};
+use marginalia::{BuiltinKind, Classify, Trivia, TriviaEvent, TriviaLexer, TriviaPiece};
 
 /// A small calculator token enum. `LineComment` and `BlockComment` carry their
 /// payload so the `Classify` impl can hand the text to marginalia.
@@ -40,11 +40,11 @@ impl Classify for Tok {
     fn trivia(&self) -> Option<TriviaPiece<'_>> {
         match self {
             Self::LineComment(s) => Some(TriviaPiece {
-                kind: marginalia::TriviaKind::Line,
+                kind: BuiltinKind::Line,
                 text: s,
             }),
             Self::BlockComment(s) => Some(TriviaPiece {
-                kind: marginalia::TriviaKind::Block,
+                kind: BuiltinKind::Block,
                 text: s,
             }),
             _ => None,
@@ -68,8 +68,14 @@ pub fn lex(source: &str) -> (Vec<(usize, Tok, usize)>, Vec<TriviaEvent>) {
 /// Project a trivia event to a short human-readable tag for snapshot tests.
 pub fn describe(event: &TriviaEvent) -> String {
     match &event.trivia {
-        Trivia::Line(text) => format!("line@{}..{}: {text}", event.span.start, event.span.end),
-        Trivia::Block(text) => format!("block@{}..{}: {text}", event.span.start, event.span.end),
+        Trivia::Comment {
+            kind: BuiltinKind::Line,
+            text,
+        } => format!("line@{}..{}: {text}", event.span.start, event.span.end),
+        Trivia::Comment {
+            kind: BuiltinKind::Block,
+            text,
+        } => format!("block@{}..{}: {text}", event.span.start, event.span.end),
         Trivia::BlankLine => format!("blank@{}..{}", event.span.start, event.span.end),
     }
 }
