@@ -1,7 +1,9 @@
 use std::collections::HashMap;
 
 use cranelift::codegen::ir::types::*;
-use cranelift::codegen::ir::{AbiParam, Function, InstBuilder, Signature, UserFuncName};
+use cranelift::codegen::ir::{
+    AbiParam, Function, InstBuilder, MemFlagsData, Signature, UserFuncName,
+};
 use cranelift::codegen::settings::{self, Configurable};
 use cranelift::codegen::verifier::verify_function;
 use cranelift::codegen::Context;
@@ -428,7 +430,7 @@ pub fn compile_sum_array(jit: &mut JitCompiler) -> Result<FuncId, String> {
             // Body: load value and add to sum
             builder.switch_to_block(body_block);
             builder.seal_block(body_block);
-            let flags = MemFlags::new();
+            let flags = MemFlagsData::new();
             let value = builder.ins().load(I64, flags, current_ptr, 0);
             let new_sum = builder.ins().iadd(sum, value);
             let new_index = builder.ins().iadd_imm(index, 1);
