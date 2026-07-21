@@ -21,7 +21,7 @@ pub fn analyze_function(input: TokenStream) -> Result<FunctionAnalysis> {
 
     let param_count = func.sig.inputs.len();
     let is_async = func.sig.asyncness.is_some();
-    let is_unsafe = func.sig.unsafety.is_some();
+    let is_unsafe = matches!(func.sig.safety, syn::Safety::Unsafe(_));
     let has_generics = !func.sig.generics.params.is_empty();
 
     let params = func
