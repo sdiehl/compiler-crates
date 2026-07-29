@@ -85,7 +85,7 @@ impl JitCompiler {
         build_fn(&mut builder, &variables);
 
         // Finalize the function
-        builder.finalize();
+        builder.finalize(self.module.target_config());
 
         // Verify the function
         if let Err(errors) = verify_function(&self.ctx.func, self.module.isa()) {
@@ -183,7 +183,7 @@ pub fn compile_factorial(jit: &mut JitCompiler) -> Result<FuncId, String> {
         builder.switch_to_block(body_block);
         builder.seal_block(body_block);
         let new_result = builder.ins().imul(result, i);
-        let new_i = builder.ins().iadd_imm(i, 1);
+        let new_i = builder.ins().iadd_imm_s(i, 1);
         builder
             .ins()
             .jump(header_block, &[new_i.into(), new_result.into()]);
@@ -258,7 +258,7 @@ pub fn compile_fibonacci(jit: &mut JitCompiler) -> Result<FuncId, String> {
         builder.switch_to_block(loop_body);
         builder.seal_block(loop_body);
         let next_fib = builder.ins().iadd(curr_a, curr_b);
-        let next_counter = builder.ins().iadd_imm(counter, 1);
+        let next_counter = builder.ins().iadd_imm_s(counter, 1);
         builder.ins().jump(
             loop_header,
             &[next_counter.into(), curr_b.into(), next_fib.into()],
@@ -349,7 +349,7 @@ pub fn compile_with_print(jit: &mut JitCompiler) -> Result<FuncId, String> {
         builder.ins().call(println_ref, &[sum]);
 
         builder.ins().return_(&[]);
-        builder.finalize();
+        builder.finalize(jit.module.target_config());
     }
 
     // Verify the function
@@ -433,8 +433,8 @@ pub fn compile_sum_array(jit: &mut JitCompiler) -> Result<FuncId, String> {
             let flags = MemFlagsData::new();
             let value = builder.ins().load(I64, flags, current_ptr, 0);
             let new_sum = builder.ins().iadd(sum, value);
-            let new_index = builder.ins().iadd_imm(index, 1);
-            let new_ptr = builder.ins().iadd_imm(current_ptr, 8); // 8 bytes for i64
+            let new_index = builder.ins().iadd_imm_s(index, 1);
+            let new_ptr = builder.ins().iadd_imm_s(current_ptr, 8); // 8 bytes for i64
             builder.ins().jump(
                 header_block,
                 &[new_index.into(), new_sum.into(), new_ptr.into()],
