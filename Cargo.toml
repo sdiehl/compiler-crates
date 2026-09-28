@@ -33,6 +33,7 @@ members = [
   "symbol_table",
   "syn",
   "thiserror",
+  "unbound",
   "winnow",
 ]
 

@@ -51,6 +51,7 @@ A collection of minimal Rust examples focused on compiler development.
 ### Analysis & Algorithms
 
 - [**petgraph**](./petgraph/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/petgraph.html) - Graph algorithms for control flow and dependency analysis
+- [**unbound**](./unbound/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/unbound.html) - Locally nameless binding with capture-avoiding substitution and alpha equivalence
 
 ### Code Generation
 

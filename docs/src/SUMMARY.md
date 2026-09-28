@@ -50,6 +50,7 @@
 # Analysis & Algorithms
 
 - [petgraph](./petgraph.md)
+- [unbound](./unbound.md)
 
 # Code Generation
 

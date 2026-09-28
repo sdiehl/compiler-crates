@@ -1,0 +1,10 @@
+[package]
+name = "unbound-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+unbound = "0.3.0"
+
+[lints]
+workspace = true
