@@ -43,6 +43,7 @@
 - [bitflags](./bitflags.md)
 - [bumpalo](./bumpalo.md)
 - [id-arena](./id-arena.md)
+- [im](./im.md)
 - [indexmap](./indexmap.md)
 - [smallvec](./smallvec.md)
 - [symbol_table](./symbol_table.md)

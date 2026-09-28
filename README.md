@@ -44,6 +44,7 @@ A collection of minimal Rust examples focused on compiler development.
 - [**bitflags**](./bitflags/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/bitflags.html) - Type-safe bitmask flags for compiler IR and AST nodes
 - [**bumpalo**](./bumpalo/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/bumpalo.html) - Fast bump allocation arena for compiler data structures
 - [**id-arena**](./id-arena/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/id-arena.html) - Efficient arena allocation for AST and IR nodes
+- [**im**](./im/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/im.html) - Persistent collections for scoped typing environments
 - [**indexmap**](./indexmap/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/indexmap.html) - Order-preserving hash maps for symbol tables
 - [**smallvec**](./smallvec/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/smallvec.html) - Stack-allocated vectors for performance-critical paths
 - [**symbol_table**](./symbol_table/src/lib.rs) | [docs](https://sdiehl.github.io/compiler-crates/symbol_table.html) - String interning for compiler symbols
