@@ -1,9 +1,9 @@
-//! Example: persistent typing environments with `im`. Extending a scope is a
+//! Example: persistent typing environments with `imbl`. Extending a scope is a
 //! cheap copy that shares structure with its parent, so there is no undo log
 //! and every version of the environment stays valid.
 
-use im::ordmap::DiffItem;
-use im::OrdMap;
+use imbl::ordmap::DiffItem;
+use imbl::OrdMap;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Ty {

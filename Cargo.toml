@@ -11,7 +11,7 @@ members = [
   "cranelift",
   "dynasm",
   "id-arena",
-  "im",
+  "imbl",
   "indexmap",
   "inkwell",
   "lalrpop",
