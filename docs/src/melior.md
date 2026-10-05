@@ -6,23 +6,23 @@ The architecture of melior wraps MLIR's C API with idiomatic Rust abstractions, 
 
 ## Installation on macOS
 
-To use melior on macOS, you need to install LLVM/MLIR 20 via Homebrew:
+To use melior on macOS, you need to install LLVM/MLIR 23 via Homebrew:
 
 ```bash
-brew install llvm@20
+brew install llvm@23
 ```
 
 You can get the LLVM installation path with:
 
 ```bash
-$(brew --prefix llvm@20)
+$(brew --prefix llvm@23)
 ```
 
 Add melior to your Cargo.toml:
 
 ```toml
 [dependencies]
-melior = "0.25"
+melior = "0.28"
 ```
 
 ## Basic Usage
