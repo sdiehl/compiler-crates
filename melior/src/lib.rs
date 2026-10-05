@@ -141,7 +141,7 @@ pub fn module_to_string(module: &Module<'_>) -> String {
 /// Apply canonicalization transforms to simplify IR
 pub fn apply_canonicalization(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(transform::create_canonicalizer());
+    pass_manager.add_pass(transform::create_canonicalizer_pass());
     pass_manager.run(module)
 }
 
@@ -149,28 +149,28 @@ pub fn apply_canonicalization(context: &Context, module: &mut Module<'_>) -> Res
 /// computations
 pub fn apply_cse(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(transform::create_cse());
+    pass_manager.add_pass(transform::create_cse_pass());
     pass_manager.run(module)
 }
 
 /// Apply inlining transformation to inline function calls
 pub fn apply_inlining(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(transform::create_inliner());
+    pass_manager.add_pass(transform::create_inliner_pass());
     pass_manager.run(module)
 }
 
 /// Apply loop-invariant code motion to optimize loops
 pub fn apply_licm(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(transform::create_loop_invariant_code_motion());
+    pass_manager.add_pass(transform::create_loop_invariant_code_motion_pass());
     pass_manager.run(module)
 }
 
 /// Apply SCCP (Sparse Conditional Constant Propagation) for constant folding
 pub fn apply_sccp(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(transform::create_sccp());
+    pass_manager.add_pass(transform::create_sccp_pass());
     pass_manager.run(module)
 }
 
@@ -179,11 +179,11 @@ pub fn optimize_module(context: &Context, module: &mut Module<'_>) -> Result<(),
     let pass_manager = PassManager::new(context);
 
     // Standard optimization pipeline
-    pass_manager.add_pass(transform::create_canonicalizer());
-    pass_manager.add_pass(transform::create_cse());
-    pass_manager.add_pass(transform::create_sccp());
-    pass_manager.add_pass(transform::create_inliner());
-    pass_manager.add_pass(transform::create_canonicalizer()); // Run again after inlining
+    pass_manager.add_pass(transform::create_canonicalizer_pass());
+    pass_manager.add_pass(transform::create_cse_pass());
+    pass_manager.add_pass(transform::create_sccp_pass());
+    pass_manager.add_pass(transform::create_inliner_pass());
+    pass_manager.add_pass(transform::create_canonicalizer_pass()); // Run again after inlining
 
     pass_manager.run(module)
 }
@@ -191,7 +191,7 @@ pub fn optimize_module(context: &Context, module: &mut Module<'_>) -> Result<(),
 /// Example of applying symbol DCE (Dead Code Elimination)
 pub fn apply_symbol_dce(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(transform::create_symbol_dce());
+    pass_manager.add_pass(transform::create_symbol_dce_pass());
     pass_manager.run(module)
 }
 
@@ -212,7 +212,7 @@ pub fn convert_to_gpu(context: &Context, module: &mut Module<'_>) -> Result<(), 
 /// Strip debug information from the module
 pub fn strip_debug_info(context: &Context, module: &mut Module<'_>) -> Result<(), Error> {
     let pass_manager = PassManager::new(context);
-    pass_manager.add_pass(transform::create_strip_debug_info());
+    pass_manager.add_pass(transform::create_strip_debug_info_pass());
     pass_manager.run(module)
 }
 
@@ -281,32 +281,32 @@ impl<'c> PassPipeline<'c> {
     /// Add a canonicalization pass
     pub fn canonicalize(self) -> Self {
         self.pass_manager
-            .add_pass(transform::create_canonicalizer());
+            .add_pass(transform::create_canonicalizer_pass());
         self
     }
 
     /// Add a CSE pass
     pub fn eliminate_common_subexpressions(self) -> Self {
-        self.pass_manager.add_pass(transform::create_cse());
+        self.pass_manager.add_pass(transform::create_cse_pass());
         self
     }
 
     /// Add an inlining pass
     pub fn inline_functions(self) -> Self {
-        self.pass_manager.add_pass(transform::create_inliner());
+        self.pass_manager.add_pass(transform::create_inliner_pass());
         self
     }
 
     /// Add SCCP for constant propagation
     pub fn propagate_constants(self) -> Self {
-        self.pass_manager.add_pass(transform::create_sccp());
+        self.pass_manager.add_pass(transform::create_sccp_pass());
         self
     }
 
     /// Add loop optimizations
     pub fn optimize_loops(self) -> Self {
         self.pass_manager
-            .add_pass(transform::create_loop_invariant_code_motion());
+            .add_pass(transform::create_loop_invariant_code_motion_pass());
         self
     }
 
