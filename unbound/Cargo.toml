@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-unbound = "0.3.0"
+unbound = "0.4.0"
 
 [lints]
 workspace = true
