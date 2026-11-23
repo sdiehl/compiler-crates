@@ -60,9 +60,12 @@ pub enum Token {
     })]
     StringLiteral(String),
 
-    // Skip whitespace
     #[regex(r"[ \t\n\f]+", logos::skip)]
+    Whitespace,
+
     #[regex(r"//[^\n]*", logos::skip, allow_greedy = true)]
+    LineComment,
+
     Error,
 }
 
@@ -90,6 +93,7 @@ impl fmt::Display for Token {
             Token::Number(n) => write!(f, "{}", n),
             Token::Identifier(s) => write!(f, "{}", s),
             Token::StringLiteral(s) => write!(f, "\"{}\"", s),
+            Token::Whitespace | Token::LineComment => Ok(()),
             Token::Error => write!(f, "<error>"),
         }
     }
