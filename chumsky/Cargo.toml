@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 ariadne = "0.6"
-chumsky = "0.13"
+chumsky = "0.14"
 
 [lints]
 workspace = true

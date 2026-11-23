@@ -62,8 +62,10 @@ pub enum Token {
 
     // Comments
     #[regex(r"//[^\n]*", logos::skip, allow_greedy = true)]
+    LineComment,
+
     #[regex(r"/\*([^*]|\*[^/])*\*/", logos::skip)]
-    Comment,
+    BlockComment,
 
     // Operators
     #[token("+")]
